@@ -1,0 +1,2 @@
+# darkpad
+Python text editor
