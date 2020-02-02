@@ -9,6 +9,18 @@ function rs_window(method) {
 	}
 }
 
+function toggle_home() {
+	if (home_toggled){
+		html.style.setProperty('--gui-home-left','calc( var(--gui-home-width) - ( var(--gui-home-width) * 2 ) )');
+		html.style.setProperty('--gui-home-opacity','0');
+		home_toggled = false;
+	}else{
+		html.style.setProperty('--gui-home-left','0px');
+		html.style.setProperty('--gui-home-opacity','1');
+		home_toggled = true;
+	}
+}
+
 ipc.on('app', (event, arg) => {
 	let a = arg.split('=');
 	switch (a[0]){

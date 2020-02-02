@@ -23,26 +23,46 @@
 	--gui-size-menu-separator:		5px;
 	--gui-size-menu-pad:			3px;
 	--gui-size-menu-pad-left:		6px;
+	--gui-size-option:				40px;
+	--gui-size-home-button:			16px;
 	
 	--gui-transition-time:			0.1s;
-	--gui-button-font:				Roboto Light;
+	--gui-transition-time-long:		0.5s;
+	--gui-button-font:				Segoe UI Light;
+	--gui-button-home-font:			Segoe UI Light;
 	--gui-menu-font:				Segoe UI;
 	--gui-title-margin:				7px;
-	--gui-text-font:				Roboto Light;
+	--gui-text-font:				Segoe UI Light;
+	--gui-home-opacity:				0;
+	--gui-home-width:				100px;
+	--gui-home-left:				calc( var(--gui-home-width) - ( var(--gui-home-width) * 2 ) );
 }
 
 body {
-	background-color: #ffffff;
+	background-color: var(--gui-color-background);
 	overflow: hidden;
 	margin: 0px;
 }
 
-.titlebar {
+.panel {
 	background-color: var(--gui-color-titlebar);
 	position: absolute;
+	box-shadow: 0px 0px var(--gui-size-shadow) var(--gui-color-shadow);
+	transition-duration: var(--gui-transition-time-long);
+}
+
+.panel.home {
+	width: var(--gui-home-width);
+	height: calc( 100% - var(--gui-size-titlebar) );
+	top: var(--gui-size-titlebar);
+	left: var(--gui-home-left);
+	opacity: var(--gui-home-opacity);
+	z-index: 4;
+}
+
+.panel.titlebar {
 	width: 100%;
 	height: var(--gui-size-titlebar);
-	box-shadow: 0px 0px var(--gui-size-shadow) var(--gui-color-shadow);
 	top: 0px;
 	left: 0px;
 	z-index: 5;
@@ -50,13 +70,33 @@ body {
 	-webkit-app-region: drag;
 }
 
+.home_button {
+	width: 100%;
+	height: var(--gui-size-option);
+	background-color: rgba(0,0,0,0);
+	font-family: var(--gui-button-home-font);
+	font-size: var(--gui-size-home-button);
+	color: var(--gui-color-button-text);
+	border: none;
+	transition-duration: var(--gui-transition-time);
+}
+
+.home_button:hover {
+	background-color: var(--gui-color-button-hover);
+}
+
+.home_button:focus {
+	outline: none;
+}
+
 .textarea {
 	background-color: var(--gui-color-background);
 	position: absolute;
-	width: 100%;
+	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
 	top: var(--gui-size-titlebar);
-	left: 0px;
+	left: calc( var(--gui-home-left) + var(--gui-home-width) );
 	height: calc( 100% - var(--gui-size-titlebar) );
+	transition-duration: var(--gui-transition-time-long);
 }
 
 .title {
@@ -114,6 +154,7 @@ body {
 	border: 1px solid var(--gui-color-menu-border);
 	box-shadow: 0px 0px var(--gui-size-shadow) var(--gui-color-shadow);
 	z-index: 10;
+	-webkit-app-region: no-drag;
 }
 
 
