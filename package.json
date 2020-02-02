@@ -1,0 +1,23 @@
+{
+  "name": "darkpad",
+  "version": "1.0.0",
+  "description": "Python text editor",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HJfod/darkpad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HJfod/darkpad/issues"
+  },
+  "homepage": "https://github.com/HJfod/darkpad#readme",
+  "dependencies": {
+    "electron": "^7.1.11",
+    "jquery": "^3.4.1"
+  }
+}
