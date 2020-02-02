@@ -3,6 +3,7 @@ from tkinter import filedialog, Text
 import os
 
 button_width = 40
+g_fs = 0
 
 root = tk.Tk()
 root.geometry('500x300')
@@ -15,12 +16,19 @@ def hover_e(e):
 def hover_l(e):
 	e.widget.configure(bg='#000')
 
-def fullscreen(x):
-	root.attributes('-fullscreen','%(b)d' % {'b': x})
+def fullscreen():
 	root.update()
 
-def confg(e):
-	
+def switchfs(s):
+	if (s == 0):
+		gf_s = 1
+		confg()
+	else:
+		gf_s = 0
+		confg()
+
+def confg(e = 0):
+	root.attributes('-fullscreen','%(b)d' % {'b': g_fs})
 
 #canvas = tk.Canvas(root, height=300, width=500, bg="#000000")
 #canvas.pack()
@@ -37,12 +45,12 @@ def confg(e):
 root.update()
 
 class app:
-	b_exit = tk.Button(root, text='✕', font=('Roboto Lt',12,'normal'), border=0, padx=5, pady=20, fg="#fff", bg="#0a0a0a", activebackground='#f00', activeforeground='#fff', command=root.quit)
+	b_exit = tk.Button(root, text='✕', font=('Roboto Lt',12,'normal'), border=0, padx=5, pady=20, fg="#fff", bg="#000", activebackground='#f00', activeforeground='#fff', command=root.quit)
 	b_exit.place(width = button_width, height=25, x = root.winfo_width()-button_width, y = 0)
 	b_exit.bind('<Enter>', hover_e)
 	b_exit.bind('<Leave>', hover_l)
 	
-	b_fs = tk.Button(root, text='✕', font=('Roboto Lt',12,'normal'), border=0, padx=5, pady=20, fg="#fff", bg="#0a0a0a", activebackground='#f00', activeforeground='#fff', command=fullscreen(1))
+	b_fs = tk.Button(root, text='☐', font=('Roboto Lt',12,'normal'), border=0, padx=5, pady=20, fg="#fff", bg="#000", activebackground='#66c', activeforeground='#fff', command=switchfs(g_fs))
 	b_fs.place(width = button_width, height=25, x = root.winfo_width()-button_width*2, y = 0)
 	b_fs.bind('<Enter>', hover_e)
 	b_fs.bind('<Leave>', hover_l)
