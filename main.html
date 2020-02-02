@@ -6,9 +6,25 @@
 </head>
 <body>
 
-<div id='titlebar' class='titlebar'>
+<div id='home' class='panel home'>
 	
-	<button id='button_home' class='button home' data-menu='New file\\//Save file\\//Open file\\'>&#9750;</button>
+	<button class='home_button' onclick='new_project();'>New file</button>
+	
+	<button class='home_button' onclick='save_project();'>Save file</button>
+	
+	<button class='home_button' onclick='load_project();'>Load file</button>
+	
+	<div style='bottom: 0px; width: 100%; position: absolute;'>
+		
+		<button class='home_button invert' onclick='window.open("options.html","","width=200,height=200")'>Settings</button>
+		
+	</div>
+	
+</div>
+
+<div id='titlebar' class='panel titlebar'>
+	
+	<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Open file\\load_project();' onclick='toggle_home();'>&#9750;</button>
 	
 	<text id='title' class='title'>Unnamed document</text>
 
@@ -22,7 +38,7 @@
 
 <div id='textarea' class='textarea'>
 	
-	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//Color\\//---//Settingsssss \\ '></text>
+	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//Color\\//---//Settings \\window.open("settings.html");'></text>
 	
 </div>
 
@@ -31,5 +47,6 @@
 <script src='scripts/init.js'></script>
 <script src='scripts/gui.js'></script>
 <script src='scripts/text.js'></script>
+<script src='scripts/file.js'></script>
 </body>
 </html>
