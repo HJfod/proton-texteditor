@@ -1,2 +1,2 @@
 # darkpad
-Python text editor
+HJpad v3
