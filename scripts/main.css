@@ -1,0 +1,175 @@
+:root {
+	--gui-color-background:			rgb(0,0,0);
+	--gui-color-titlebar:			rgb(0,0,0);
+	--gui-color-shadow:				rgba(30,30,30,0.5);
+	--gui-color-button-hover:		rgba(255,255,255,0.2);
+	--gui-color-button-text:		rgb(255,255,255);
+	--gui-color-title-text:			rgb(255,255,255);
+	--gui-color-title-new:			rgba(255,255,255,0.3);
+	--gui-color-menu-background:	rgba(40,40,45,1);
+	--gui-color-menu-border:		rgba(0,0,0,1);
+	--gui-color-menu-option:		rgb(255,255,255);
+	--gui-color-menu-separator:		rgba(255,255,255,0.2);
+	--gui-color-menu-hover:			rgba(80,80,85,1);
+	--gui-color-text-default:		rgb(255,255,255);
+	
+	--gui-size-titlebar:			30px;
+	--gui-size-shadow:				10px;
+	--gui-size-button-width:		45px;
+	--gui-size-button-text:			15px;
+	--gui-size-title:				14px;
+	--gui-size-menu-text:			14px;
+	--gui-size-margin:				10px;
+	--gui-size-menu-separator:		5px;
+	--gui-size-menu-pad:			3px;
+	--gui-size-menu-pad-left:		6px;
+	
+	--gui-transition-time:			0.1s;
+	--gui-button-font:				Roboto Light;
+	--gui-menu-font:				Segoe UI;
+	--gui-title-margin:				7px;
+	--gui-text-font:				Roboto Light;
+}
+
+body {
+	background-color: #ffffff;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.titlebar {
+	background-color: var(--gui-color-titlebar);
+	position: absolute;
+	width: 100%;
+	height: var(--gui-size-titlebar);
+	box-shadow: 0px 0px var(--gui-size-shadow) var(--gui-color-shadow);
+	top: 0px;
+	left: 0px;
+	z-index: 5;
+	-webkit-user-select: none;
+	-webkit-app-region: drag;
+}
+
+.textarea {
+	background-color: var(--gui-color-background);
+	position: absolute;
+	width: 100%;
+	top: var(--gui-size-titlebar);
+	left: 0px;
+	height: calc( 100% - var(--gui-size-titlebar) );
+}
+
+.title {
+	top: var(--gui-title-margin);
+	left: calc( var(--gui-title-margin) + var(--gui-size-button-width) );
+	font-size: var(--gui-size-title);
+	font-family: var(--gui-button-font);
+	color: var(--gui-color-title-new);
+	position: absolute;
+}
+
+.button {
+	background-color: rgba(0,0,0,0);
+	position: absolute;
+	color: var(--gui-color-button-text);
+	top: 0px;
+	font-size: var(--gui-size-button-text);
+	font-family: var(--gui-button-font);
+	width: var(--gui-size-button-width);
+	height: var(--gui-size-titlebar);
+	border: none;
+	-webkit-app-region: no-drag;
+	transition-duration: var(--gui-transition-time);
+}
+
+.button.close {
+	left: calc( 100% - var(--gui-size-button-width) );
+}
+
+.button.fs {
+	left: calc( 100% - ( var(--gui-size-button-width) * 2 ) );
+}
+
+.button.min {
+	left: calc( 100% - ( var(--gui-size-button-width) * 3 ) );
+}
+
+.button:hover {
+	background-color: var(--gui-color-button-hover);
+}
+
+.button:focus {
+	outline: none;
+}
+
+.button.close:hover {
+	background-color: rgb(255,0,0);
+}
+
+.menu_window {
+	position: absolute;
+	background-color: var(--gui-color-menu-background);
+	top: 0px;
+	left: 0px;
+	border: 1px solid var(--gui-color-menu-border);
+	box-shadow: 0px 0px var(--gui-size-shadow) var(--gui-color-shadow);
+	z-index: 10;
+}
+
+
+.menu_option {
+	background-color: rgba(0,0,0,0);
+	border: none;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	color: var(--gui-color-menu-option);
+	transition-duration: var(--gui-transition-time);
+	font-family: var(--gui-menu-font);
+	font-size: var(--gui-size-menu-text);
+	border: none;
+	padding: var(--gui-size-menu-pad);
+	padding-left: var(--gui-size-menu-pad-left);
+	white-space: nowrap;
+}
+
+.menu_separator {
+	background-color: rgba(0,0,0,0);
+	border: none;
+	display: flex;
+	width: 100%;
+	height: var(--gui-size-menu-separator);
+	flex-direction: column;
+	color: var(--gui-color-menu-separator);
+	font-family: var(--gui-menu-font);
+	font-size: var(--gui-size-menu-separator);
+	border: none;
+	padding: var(--gui-size-menu-pad);
+	padding-left: var(--gui-size-menu-pad-left);
+}
+
+.menu_option:hover {
+	background-color: var(--gui-color-menu-hover);
+}
+
+.menu_option:focus {
+	outline: none;
+}
+
+.menu_separator:focus {
+	outline: none;
+}
+
+.writing_area {
+	color: var(--gui-color-text-default);
+	font-family: var(--gui-text-font);
+	left: var(--gui-size-margin);
+	top: var(--gui-size-margin);
+	width: calc( 100% - ( var(--gui-size-margin) * 2) );
+	height: calc( 100% - ( var(--gui-size-margin) * 2) );
+	position: absolute;
+}
+
+.writing_area:focus {
+	outline: none;
+}
