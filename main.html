@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'/>
+<link rel='stylesheet' href='scripts/main.css'/>
+</head>
+<body>
+
+<div id='titlebar' class='titlebar'>
+	
+	<button id='button_home' class='button home' data-menu='New file\\//Save file\\//Open file\\'>&#9750;</button>
+	
+	<text id='title' class='title'>Unnamed document</text>
+
+	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
+	
+	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
+	
+	<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
+	
+</div>
+
+<div id='textarea' class='textarea'>
+	
+	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//Color\\//---//Settingsssss \\ '></text>
+	
+</div>
+
+<div id='menu_window' class='menu_window'></div>
+
+<script src='scripts/init.js'></script>
+<script src='scripts/gui.js'></script>
+<script src='scripts/text.js'></script>
+</body>
+</html>
