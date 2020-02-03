@@ -21,6 +21,10 @@ function toggle_home() {
 	}
 }
 
+function open_settings() {
+	window.open('options.html?theme=' + theme_current,'','width=400,height=400');
+}
+
 ipc.on('app', (event, arg) => {
 	let a = arg.split('=');
 	switch (a[0]){
@@ -31,18 +35,20 @@ ipc.on('app', (event, arg) => {
 				$('#menu_fs').text(`\u2610`);
 			}
 			break;
+		case 'change-theme':
+			switch_theme(a[1]);
+			break;
 	}
 });
 
-$(document).click( () => {
+$(document).mouseup( () => {
 	close_menu();
 }).keypress( () => {
-	close_menu()
+	close_menu();
 });
 
 $('[data-menu]').contextmenu( (e) => {
 	let m = $('#menu_window');
-	let t = m.is(':hidden');
 	
 	let v = $(e.target).attr('data-menu');
 	v = v.split('//');
@@ -58,7 +64,7 @@ $('[data-menu]').contextmenu( (e) => {
 			let n_o = document.createElement('button');
 			n_o.innerHTML = v[i][0];
 			n_o.setAttribute('class','menu_option');
-			n_o.setAttribute('onclick',v[i][2]);
+			n_o.setAttribute('onmouseup',v[i][2]);
 			m.append(n_o);
 		}
 	}

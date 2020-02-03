@@ -10,12 +10,15 @@ app.on('ready', () => {
 	window_main.loadFile('main.html');
 	
 	ipc.on('app', (event, arg) => {
-		switch (arg) {
+		let a = arg.split('=');
+		switch (a[0]) {
 			case 'toggle-fs':
 				toggleFullscreen();
 				break;
 			case 'minimize':
 				window_main.minimize();
+			case 'change-theme':
+				window_main.webContents.send('app',arg);
 		}
 	});
 	

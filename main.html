@@ -18,8 +18,8 @@
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
-		<img class='home_gog' src='gog.png'></img>
-		<button class='home_button invert' onclick='window.open("options.html","","width=200,height=200")'>Settings</button>
+		
+		<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
 		
 	</div>
 	
@@ -41,7 +41,7 @@
 
 <div id='textarea' class='textarea'>
 	
-	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color »\\colourText(0)//---//Settings \\window.open("settings.html");'></text>
+	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color<span class="menu_arrow" style="left: 50px">»</span>\\colourText(0)//---//Settings \\open_settings();'></text>
 	
 </div>
 
@@ -50,6 +50,7 @@
 <div id='menu_select' class='menu_window'></div>
 
 <script src='scripts/init.js'></script>
+<script src='scripts/theme.js'></script>
 <script src='scripts/gui.js'></script>
 <script src='scripts/text.js'></script>
 <script src='scripts/file.js'></script>

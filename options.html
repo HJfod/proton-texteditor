@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Settings</title>
 <meta charset='UTF-8'/>
 <link rel='stylesheet' href='scripts/main.css'/>
 </head>
@@ -8,16 +9,88 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<text id='title' class='title' style='color: #ffffff; left: var(--gui-title-margin);'>Settings</text>
+	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Settings</text>
 
 	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
-	
+	<!--
 	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
 	
 	<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
+	-->
+</div>
+
+<div id='tabs' class='tabs'>
+	
+	<button onclick='switch_tab(0)' id='o_btab0' class='tab selected'>General</button>
+	
+	<button onclick='switch_tab(1)' id='o_btab1' class='tab'>Text</button>
+	
+	<button onclick='switch_tab(2)' id='o_btab2' class='tab'>Appearance</button>
+	
+	<button onclick='switch_tab(3)' id='o_btab3' class='tab'>About</button>
 	
 </div>
 
+<div id='o_tab0' class='option_tab'>
+	
+	<label class='checkbox_container'>
+		<input type='checkbox'>Save file as plain text (Export)</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
+	
+</div>
+
+<div id='o_tab1' class='option_tab'>
+	
+	<text>Font</text><br>
+	<div class='select'>
+		<button class='selector' onclick=''>Segoe UI Light</button>
+		<button class='selector' onclick=''>Roboto Light</button>
+		<button class='selector' onclick=''>Calibri</button>
+	</div>
+	
+	<br><br>
+	
+	<text>Font size</text>
+	
+</div>
+
+<div id='o_tab2' class='option_tab'>
+	
+	<text>Theme</text><br>
+	<div class='select'>
+		<button class='selector' onclick='option_switch_theme("midnight")'>Midnight</button>
+		<button class='selector' onclick='option_switch_theme("ruska")'>Ruska</button>
+		<button class='selector' onclick='option_switch_theme("light")'>Light</button>
+	</div>
+	
+</div>
+
+<div id='o_tab3' class='option_tab'>
+	
+	<text>DarkPad v1.0</text>
+	
+	<br><br>
+	
+	<text style='color: rgb(180,80,100)'>Developed by HJfod</text>
+	
+	<br><br>
+	
+	<text>Powered by Electron, jQuery, fileReader</text>
+	
+	<br><br>
+	
+	<text style='color: rgb(100,80,180)'>https://www.electronjs.org/<br>https://jquery.com/<br>https://github.com/bgrins/filereader.js</text>
+	
+</div>
+
+<div id='menu_window' class='menu_window'></div>
+
+<div id='menu_select' class='menu_window'></div>
+
+<script src='scripts/init.js'></script>
+<script src='scripts/theme.js'></script>
 <script src='scripts/gui.js'></script>
+<script src='scripts/options.js'></script>
 </body>
 </html>
