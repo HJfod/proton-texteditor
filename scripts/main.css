@@ -188,6 +188,7 @@ body {
 	border: none;
 	padding: var(--gui-size-menu-pad);
 	padding-left: var(--gui-size-menu-pad-left);
+	padding-right: var(--gui-size-menu-pad-left);
 }
 
 .home_gog {
