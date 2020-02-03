@@ -13,3 +13,4 @@ $(document).mousemove( (e) => {
 });
 
 $('#menu_window').hide();
+$('#menu_select').hide();

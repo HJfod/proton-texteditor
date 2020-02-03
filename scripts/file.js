@@ -15,7 +15,7 @@ function new_project() {
 	
 }
 
-function save_project() {
+function save_project(e = 0) {
 	if (opened_project == ''){
 		name = 'unnamed';
 	}else{

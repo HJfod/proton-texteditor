@@ -172,6 +172,7 @@ body {
 	padding: var(--gui-size-menu-pad);
 	padding-left: var(--gui-size-menu-pad-left);
 	white-space: nowrap;
+	padding-right: var(--gui-size-menu-pad-left);
 }
 
 .menu_separator {
@@ -187,6 +188,16 @@ body {
 	border: none;
 	padding: var(--gui-size-menu-pad);
 	padding-left: var(--gui-size-menu-pad-left);
+}
+
+.home_gog {
+	opacity: 0.3;
+	width: 10px;
+}
+
+.menu_option.wide {
+	padding-right: calc( var(--gui-size-menu-pad-left) * 2);
+	padding-left: calc( var(--gui-size-menu-pad-left) * 2);
 }
 
 .menu_option:hover {
