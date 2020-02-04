@@ -17,7 +17,8 @@ app.on('ready', () => {
 				break;
 			case 'minimize':
 				window_main.minimize();
-			case 'change-theme':
+				break;
+			default:
 				window_main.webContents.send('app',arg);
 		}
 	});

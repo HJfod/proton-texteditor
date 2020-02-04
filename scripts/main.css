@@ -33,6 +33,8 @@
 	--gui-size-tab-text:			15px;
 	--gui-size-tab-pad:				8px;
 	--gui-size-checkbox:			20px;
+	--gui-size-markdown:			0px;
+	--gui-size-markdown-length:		20px;
 	
 	--gui-transition-time:			0.1s;
 	--gui-transition-time-long:		0.5s;
@@ -81,6 +83,35 @@ body {
 	-webkit-app-region: drag;
 }
 
+.panel.markdown {
+	background-color: var(--gui-color-menu-background);
+	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
+	height: var(--gui-size-markdown);
+	top: var(--gui-size-titlebar);
+	left: calc( var(--gui-home-left) + var(--gui-home-width) );
+	z-index: 3;
+	transition-duration: var(--gui-transition-time);
+}
+
+.markbutton {
+	background-color: rgba(0,0,0,0);
+	width: var(--gui-size-markdown);
+	height: var(--gui-size-markdown);
+	border: none;
+	color: var(--gui-color-button-text);
+	transition-duration: var(--gui-transition-time);
+	font-family: var(--gui-button-home-font);
+	font-size: calc( var(--gui-size-markdown) / 2 );
+}
+
+.markbutton:hover {
+	background-color: var(--gui-color-button-hover);
+}
+
+.markbutton:focus {
+	outline: none;
+}
+
 .home_button {
 	width: 100%;
 	height: var(--gui-size-option);
@@ -113,9 +144,9 @@ body {
 	background-color: var(--gui-color-background);
 	position: absolute;
 	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
-	top: var(--gui-size-titlebar);
+	top: calc( var(--gui-size-titlebar) + var(--gui-size-markdown) );
 	left: calc( var(--gui-home-left) + var(--gui-home-width) );
-	height: calc( 100% - var(--gui-size-titlebar) );
+	height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-markdown) ) );
 	transition-duration: var(--gui-transition-time-long);
 }
 
@@ -365,7 +396,7 @@ body {
 }
 
 .selector {
-	background-color: rgba(0,0,0,0);
+	background-color: var(--gui-color-checkbox-unchecked);
 	border: none;
 	display: inline;
 	flex-direction: column;

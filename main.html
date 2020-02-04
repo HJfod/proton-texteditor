@@ -39,6 +39,18 @@
 	
 </div>
 
+<div id='markdown' class='panel markdown'>
+	
+	<button class='markbutton' onclick='colourText(1)'>𝐁</button>
+	
+	<button class='markbutton' onclick='colourText(2)'>𝑖</button>
+	
+	<button class='markbutton' onclick='colourText(3)'>U̲</button>
+	
+	<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
+	
+</div>
+
 <div id='textarea' class='textarea'>
 	
 	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color<span class="menu_arrow" style="left: 50px">»</span>\\colourText(0)//---//Settings \\open_settings();'></text>

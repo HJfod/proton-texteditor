@@ -22,7 +22,7 @@ function toggle_home() {
 }
 
 function open_settings() {
-	window.open('options.html?theme=' + theme_current,'','width=400,height=400');
+	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').is(':visible') + '&fonts=' + fonts,'','width=400,height=400');
 }
 
 ipc.on('app', (event, arg) => {
@@ -37,6 +37,21 @@ ipc.on('app', (event, arg) => {
 			break;
 		case 'change-theme':
 			switch_theme(a[1]);
+			break;
+		case 'toggle_markdown':
+			if ($('#markdown').is(':hidden')){
+				$('#markdown').show();
+				html.style.setProperty('--gui-size-markdown','var(--gui-size-markdown-length)');
+			}else{
+				$('#markdown').hide();
+				html.style.setProperty('--gui-size-markdown','0px');
+			}
+		case 'change-font':
+			html.style.setProperty('--gui-text-font',a[1]);
+			break;
+		case 'fonts':
+			fonts = a[1];
+			console.log(fonts);
 			break;
 	}
 });

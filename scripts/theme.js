@@ -14,7 +14,9 @@ function switch_theme(to){
 				shadow: 'rgba(30,30,30,0.5)',
 				menuop: 'rgb(255,255,255)',
 				menusep: 'rgba(255,255,255,0.2)',
-				menubg: 'rgb(0,0,0)'
+				menubg: 'rgb(0,0,0)',
+				cbox: 'rgb(100,100,100)',
+				cboxu: 'rgb(20,20,20)'
 			};
 			break;
 		case 'ruska':
@@ -29,7 +31,9 @@ function switch_theme(to){
 				shadow: 'rgba(25,25,25,0.5)',
 				menuop: 'rgb(255,255,255)',
 				menusep: 'rgba(255,200,220,0.2)',
-				menubg: 'rgb(4,2,4)'
+				menubg: 'rgb(4,2,4)',
+				cbox: 'rgb(120,30,45)',
+				cboxu: 'rgb(20,20,20)'
 			};
 			break;
 		case 'light':
@@ -44,7 +48,43 @@ function switch_theme(to){
 				shadow: 'rgba(0,0,0,0.5)',
 				menuop: 'rgb(0,0,0)',
 				menusep: 'rgba(0,0,0,0.5)',
-				menubg: 'rgb(235,235,235)'
+				menubg: 'rgb(235,235,235)',
+				cbox: 'rgb(200,200,200)',
+				cboxu: 'rgb(230,230,230)'
+			};
+			break;
+		case 'ocean':
+			scheme = {
+				tb: 'linear-gradient(to right,rgb(0,10,60),rgb(5,50,70))',
+				bg: 'rgb(2,4,8)',
+				home: 'rgb(0,3,14)',
+				text: 'rgb(255,255,255)',
+				bt: 'rgb(255,255,255)',
+				title: 'rgb(255,255,255)',
+				titlen: 'rgba(255,255,255,0.3)',
+				shadow: 'rgba(0,0,0,0.5)',
+				menuop: 'rgb(255,255,255)',
+				menusep: 'rgba(255,200,220,0.2)',
+				menubg: 'rgb(0,3,14)',
+				cbox: 'rgb(15,50,150)',
+				cboxu: 'rgb(20,20,20)'
+			};
+			break;
+		case 'spring':
+			scheme = {
+				tb: 'linear-gradient(to right,rgb(60,50,40),rgb(60,45,60),rgb(41,70,65),rgb(55,60,45))',
+				bg: 'rgb(15,15,15)',
+				home: 'rgb(25,25,25)',
+				text: 'rgb(255,255,255)',
+				bt: 'rgb(255,255,255)',
+				title: 'rgb(255,255,255)',
+				titlen: 'rgba(255,255,255,0.3)',
+				shadow: 'rgba(0,0,0,0.5)',
+				menuop: 'rgb(255,255,255)',
+				menusep: 'rgba(255,200,220,0.2)',
+				menubg: 'rgb(25,25,25)',
+				cbox: 'rgb(81,110,105)',
+				cboxu: 'rgb(20,20,20)'
 			};
 			break;
 	}
@@ -59,4 +99,6 @@ function switch_theme(to){
 	html.style.setProperty('--gui-color-menu-option',scheme.menuop);
 	html.style.setProperty('--gui-color-menu-separator',scheme.menusep);
 	html.style.setProperty('--gui-color-menu-background',scheme.menubg);
+	html.style.setProperty('--gui-color-checkbox',scheme.cbox);
+	html.style.setProperty('--gui-color-checkbox-unchecked',scheme.cboxu);
 }

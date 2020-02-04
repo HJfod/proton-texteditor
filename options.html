@@ -11,7 +11,7 @@
 	
 	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Settings</text>
 
-	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
+	<button id='button_close' class='button close' onclick='options_close();'>&#10005;</button>
 	<!--
 	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
 	
@@ -34,7 +34,12 @@
 <div id='o_tab0' class='option_tab'>
 	
 	<label class='checkbox_container'>
-		<input type='checkbox'>Save file as plain text (Export)</input>
+		<input type='checkbox' id='check_export'>Save file as plain text (Export)</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
+	
+	<label class='checkbox_container'>
+		<input type='checkbox' id='check_markdown'>Display markdown controls</input>
 		<span class='checkbox_checkmark'></span>
 	</label>
 	
@@ -43,10 +48,12 @@
 <div id='o_tab1' class='option_tab'>
 	
 	<text>Font</text><br>
-	<div class='select'>
-		<button class='selector' onclick=''>Segoe UI Light</button>
-		<button class='selector' onclick=''>Roboto Light</button>
-		<button class='selector' onclick=''>Calibri</button>
+	<div class='select' id='font_select' data-menu=''>
+		<button class='selector font' onclick='switch_font("Custom")' id='f_cu'>+</button>
+	</div>
+	<div class='select' id='font_select_c'>
+		<input class='selector' id='custom_font_input'></input>
+		<button class='selector' onclick='add_font($("#custom_font_input").val());'>Add</button>
 	</div>
 	
 	<br><br>
@@ -61,7 +68,9 @@
 	<div class='select'>
 		<button class='selector' onclick='option_switch_theme("midnight")'>Midnight</button>
 		<button class='selector' onclick='option_switch_theme("ruska")'>Ruska</button>
+		<button class='selector' onclick='option_switch_theme("ocean")'>Deeb Sea</button>
 		<button class='selector' onclick='option_switch_theme("light")'>Light</button>
+		<button class='selector' onclick='option_switch_theme("spring")'>Spring</button>
 	</div>
 	
 </div>
