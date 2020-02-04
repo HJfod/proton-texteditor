@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<div id='option_border' class='option_border'></div>
+
 <div id='titlebar' class='panel titlebar'>
 	
 	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Settings</text>
@@ -58,7 +60,9 @@
 	
 	<br><br>
 	
-	<text>Font size</text>
+	<text>Text size</text><br>
+	
+	<input class='selector' id='font_size_input' maxlength=4 size=1></input><text>px</text>
 	
 </div>
 
@@ -72,6 +76,13 @@
 		<button class='selector' onclick='option_switch_theme("light")'>Light</button>
 		<button class='selector' onclick='option_switch_theme("spring")'>Spring</button>
 	</div>
+	
+	<br><br>
+	
+	<label class='checkbox_container'>
+		<input type='checkbox' id='check_winborder' checked>Show border on window</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
 	
 </div>
 

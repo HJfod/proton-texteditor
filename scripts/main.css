@@ -16,6 +16,7 @@
 	--gui-color-tab-border:			rgb(100,100,100);
 	--gui-color-checkbox:			rgb(100,100,100);
 	--gui-color-checkbox-unchecked:	rgb(20,20,20);
+	--gui-color-window-border:		rgb(35,35,35);
 	
 	--gui-size-titlebar:			30px;
 	--gui-size-shadow:				10px;
@@ -35,6 +36,8 @@
 	--gui-size-checkbox:			20px;
 	--gui-size-markdown:			0px;
 	--gui-size-markdown-length:		20px;
+	--gui-size-checkbox-corner:		3px;
+	--gui-size-text:				16px;
 	
 	--gui-transition-time:			0.1s;
 	--gui-transition-time-long:		0.5s;
@@ -87,10 +90,11 @@ body {
 	background-color: var(--gui-color-menu-background);
 	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
 	height: var(--gui-size-markdown);
-	top: var(--gui-size-titlebar);
+	top: calc( var(--gui-size-titlebar) + var(--gui-size-tab) );
 	left: calc( var(--gui-home-left) + var(--gui-home-width) );
-	z-index: 3;
-	transition-duration: var(--gui-transition-time);
+	transition-duration: var(--gui-transition-time-long);
+	z-index: 2;
+	opacity: 0;
 }
 
 .markbutton {
@@ -144,10 +148,27 @@ body {
 	background-color: var(--gui-color-background);
 	position: absolute;
 	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
-	top: calc( var(--gui-size-titlebar) + var(--gui-size-markdown) );
+	top: calc( var(--gui-size-titlebar) + ( var(--gui-size-markdown) + var(--gui-size-tab) ) );
 	left: calc( var(--gui-home-left) + var(--gui-home-width) );
-	height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-markdown) ) );
+	height: calc( 100% - ( var(--gui-size-titlebar) + ( var(--gui-size-markdown) + var(--gui-size-tab) ) ) );
 	transition-duration: var(--gui-transition-time-long);
+}
+
+.writing_area {
+	color: var(--gui-color-text-default);
+	font-family: var(--gui-text-font);
+	font-size: var(--gui-size-text);
+	left: var(--gui-size-margin);
+	top: var(--gui-size-margin);
+	width: calc( 100% - ( var(--gui-size-margin) * 2) );
+	height: calc( 100% - ( var(--gui-size-margin) * 2) );
+	overflow-x: hidden;
+	position: absolute;
+	transition-duration: var(--gui-transition-time-long);
+}
+
+.writing_area:focus {
+	outline: none;
 }
 
 .title {
@@ -155,7 +176,7 @@ body {
 	left: calc( var(--gui-title-margin) + var(--gui-size-button-width) );
 	font-size: var(--gui-size-title);
 	font-family: var(--gui-button-font);
-	color: var(--gui-color-title-new);
+	color: var(--gui-color-title-text);
 	position: absolute;
 }
 
@@ -207,7 +228,6 @@ body {
 	z-index: 15;
 	-webkit-app-region: no-drag;
 }
-
 
 .menu_option {
 	background-color: rgba(0,0,0,0);
@@ -265,32 +285,29 @@ body {
 	position: absolute;
 }
 
-.writing_area {
-	color: var(--gui-color-text-default);
-	font-family: var(--gui-text-font);
-	left: var(--gui-size-margin);
-	top: var(--gui-size-margin);
-	width: calc( 100% - ( var(--gui-size-margin) * 2) );
-	height: calc( 100% - ( var(--gui-size-margin) * 2) );
-	position: absolute;
-}
-
-.writing_area:focus {
-	outline: none;
-}
-
 .tabs {
+	background-color: var(--gui-color-menu-background);
 	position: absolute;
 	top: var(--gui-size-titlebar);
 	height: var(--gui-size-tab);
 	width: 100%;
+	border-bottom: 1px solid var(--gui-color-tab-border);
 	display: inline-block;
-	border: 1px solid var(--gui-color-tab-border);
-	border-style: none none solid none;
+	z-index: 3;
+	overflow-y: hidden;
+	overflow-x: auto;
+	box-sizing: border-box;
+}
+
+.tabs.app {
+	top: var(--gui-size-titlebar);
+	width: calc( 100% - ( var(--gui-home-left) + var(--gui-home-width) ) );
+	left: calc( var(--gui-home-left) + var(--gui-home-width) );
+	transition-duration: var(--gui-transition-time-long);
 }
 
 .tab {
-	background-color: var(--gui-color-background);
+	background-color: var(--gui-color-menu-background);
 	border: none;
 	color: var(--gui-color-button-text);
 	height: 100%;
@@ -300,8 +317,8 @@ body {
 	padding-right: var(--gui-size-tab-pad);
 	margin: none;
 	border: 1px solid rgba(0,0,0,0);
-	border-bottom-color: rgba(0,0,0,0);
 	transition-duration: var(--gui-transition-time);
+	z-index: 3;
 }
 
 .tab:hover {
@@ -309,8 +326,10 @@ body {
 }
 
 .tab.selected {
+	background-color: var(--gui-color-background);
 	border: 1px solid var(--gui-color-tab-border);
-	border-bottom: 3px solid var(--gui-color-background);
+	border-bottom: 1px solid rgba(0,0,0,0);
+	z-index: 5;
 }
 
 .tab.selected:hover {
@@ -326,10 +345,10 @@ body {
 	margin: var(--gui-size-margin);
 	background-color: var(--gui-color-background);
 	border: none;
-	width: 100%;
+	width: calc( 100% - ( var(--gui-size-margin) * 2 ) );
 	color: var(--gui-color-button-text);
 	top: calc( var(--gui-size-titlebar) + var(--gui-size-tab) );
-	height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-tab) ) );
+	height: calc( 100% - ( var(--gui-size-titlebar) + ( var(--gui-size-tab) + ( var(--gui-size-margin) * 2 ) ) ) );
 	font-family: var(--gui-button-home-font);
 	font-size: var(--gui-size-tab-text);
 }
@@ -359,11 +378,11 @@ body {
 	height: var(--gui-size-checkbox);
 	width: var(--gui-size-checkbox);
 	background-color: var(--gui-color-checkbox-unchecked);
-	border-radius: calc( var(--gui-size-checkbox) / 7 );
 	transition-duration: var(--gui-transition-time);
 }
 .checkbox_container:hover input ~ .checkbox_checkmark {
 	background-color: var(--gui-color-button-hover);
+	border-radius: var(--gui-size-checkbox-corner);
 }
 
 .checkbox_container input:checked ~ .checkbox_checkmark {
@@ -417,4 +436,39 @@ body {
 
 .selector:focus {
 	outline: none;
+}
+
+.option_border {
+	background-color: rgba(0,0,0,0);
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: calc( 100% - 2px );
+	height: calc( 100% - 2px );
+	border: 1px solid var(--gui-color-window-border);
+	z-index: 15;
+	pointer-events: none;
+}
+
+::-webkit-scrollbar {
+	width: var(--gui-size-margin);
+}
+
+::-webkit-scrollbar-track {
+	background: var(--gui-color-checkbox-unchecked);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--gui-color-button-hover);
+	transition-duration: var(--gui-transition-time);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--gui-color-checkbox);
+	border-radius: var(--gui-size-checkbox-corner);
+	cursor: pointer;
+}
+
+.hidden {
+	opacity: 0;
 }

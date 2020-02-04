@@ -21,8 +21,16 @@ function toggle_home() {
 	}
 }
 
+function toggle_winborder() {
+	if ($('#option_border').css('opacity') === '1'){
+		$('#option_border').css('opacity',0);
+	}else{
+		$('#option_border').css('opacity',1);
+	}
+}
+
 function open_settings() {
-	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').is(':visible') + '&fonts=' + fonts,'','width=400,height=400');
+	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&winb=' + $('#option_border').css('opacity') + '&size=' + font_size,'','width=400,height=400');
 }
 
 ipc.on('app', (event, arg) => {
@@ -38,20 +46,27 @@ ipc.on('app', (event, arg) => {
 		case 'change-theme':
 			switch_theme(a[1]);
 			break;
-		case 'toggle_markdown':
-			if ($('#markdown').is(':hidden')){
-				$('#markdown').show();
+		case 'toggle-markdown':
+			if ($('#markdown').css('opacity') === '0'){
+				$('#markdown').css('opacity','1');
 				html.style.setProperty('--gui-size-markdown','var(--gui-size-markdown-length)');
 			}else{
-				$('#markdown').hide();
+				$('#markdown').css('opacity','0');
 				html.style.setProperty('--gui-size-markdown','0px');
 			}
+			break;
 		case 'change-font':
 			html.style.setProperty('--gui-text-font',a[1]);
 			break;
 		case 'fonts':
 			fonts = a[1];
-			console.log(fonts);
+			break;
+		case 'toggle-winborder':
+			toggle_winborder();
+			break;
+		case 'font-size':
+			html.style.setProperty('--gui-size-text',a[1] + 'px');
+			font_size = a[1];
 			break;
 	}
 });

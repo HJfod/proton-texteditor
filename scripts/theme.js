@@ -92,7 +92,7 @@ function switch_theme(to){
 				menusep: 'rgba(255,200,220,0.2)',
 				menubg: 'rgb(25,25,25)',
 				cbox: 'rgb(81,110,105)',
-				cboxu: 'rgb(20,20,20)',
+				cboxu: 'rgb(50,50,50)',
 				bhover: 'rgba(255,255,255,0.2)',
 				mhover: 'rgba(80,105,105,1)'
 			};

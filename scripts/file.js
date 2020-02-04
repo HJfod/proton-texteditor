@@ -12,45 +12,39 @@ function download(filename, text) {
 }
 
 function new_project() {
-	
+	$('#writing_area').text('');
 }
 
 function save_project(e = 0) {
-	if (opened_project == ''){
+	if (opened_project.name == ''){
 		name = 'unnamed';
 	}else{
-		name = opened_project;
+		name = opened_project.name;
 	}
 	
 	download(name, document.getElementById('writing_area').innerHTML);
 }
 
+$('#project_loader').change( () => {
+	load_project();
+});
+
 function load_project() {
-	if (document.getElementById("projectLoader").value === ""){
+	if ($('#project_loader').val() === ''){
 		return;
 	}
 	
-	var reader = new FileReader();
-	var fileInput = document.getElementById("projectLoader");
+	let reader = new FileReader();
+	let fileInput = document.getElementById('project_loader');
 	
-	var fileTypes = ["txt"];
+	let file = fileInput.files[0];
+	let textType = /text.*/;
 	
-	var file = fileInput.files[0];
-	var textType = /text.*/;
-	
-	var extension = file.name.split('.').pop().toLowerCase(),  //file extension from input file
-		isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-	
-	if (isSuccess) { //yes
-		var reader = new FileReader();
-		reader.readAsText(file);
-		reader.onload = function(e) {
-			textArea.value = reader.result;
-			currentFilePath = file.path;
-			opened_project = file.name;
-		}
-	}else{
-		alert("File type invalid.");
+	reader.readAsText(file);
+	reader.onload = function(e) {
+		document.getElementById('writing_area').innerHTML = reader.result;
+		opened_project.path = file.path;
+		opened_project.name = file.name;
 	}
 	
 	fileInput.value = null;

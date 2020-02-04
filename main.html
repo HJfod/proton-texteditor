@@ -6,13 +6,15 @@
 </head>
 <body>
 
+<div id='option_border' class='option_border'></div>
+
 <div id='home' class='panel home'>
 	
 	<button class='home_button' onclick='new_project();'>New file</button>
 	
 	<button class='home_button' onclick='save_project();'>Save file</button>
 	
-	<button class='home_button' onclick='load_project();'>Load file</button>
+	<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
 	
 	<button class='home_button' onclick='save_project(1);'>Export file</button>
 	
@@ -27,10 +29,10 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Open file\\load_project();' onclick='toggle_home();'>&#9750;</button>
+	<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Open file\\$("#project_loader").click();' onclick='toggle_home();'>&#9750;</button>
 	
-	<text id='title' class='title'>Unnamed document</text>
-
+	<text id='title' class='title'>DarkPad</text>
+	
 	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
 	
 	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
@@ -51,6 +53,12 @@
 	
 </div>
 
+<div id='tabs' class='tabs app' data-menu='New file\\new_doc()'>
+	
+	<button onclick='new_doc()' class='tab add' id='tabnew'>+</button>
+	
+</div>
+
 <div id='textarea' class='textarea'>
 	
 	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color<span class="menu_arrow" style="left: 50px">»</span>\\colourText(0)//---//Settings \\open_settings();'></text>
@@ -61,10 +69,14 @@
 
 <div id='menu_select' class='menu_window'></div>
 
+<input type='file' size='40' id='project_loader' class='hidden'></input>
+
 <script src='scripts/init.js'></script>
 <script src='scripts/theme.js'></script>
 <script src='scripts/gui.js'></script>
+<script src='scripts/tabs.js'></script>
 <script src='scripts/text.js'></script>
 <script src='scripts/file.js'></script>
+<script src='scripts/finish.js'></script>
 </body>
 </html>

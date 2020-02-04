@@ -2,6 +2,8 @@ $('.option_tab').hide();
 $('#o_tab0').show();
 $('#font_select_c').hide();
 
+let url = new URL(window.location.href);
+
 function options_close() {
 	let t = '';
 	$('.selector.font').each((i,obj) => {
@@ -61,10 +63,9 @@ for (let i = 0; i < default_fonts.length; i++){
 
 $('.selector.font').each((i, obj) => { $(obj).css('font-family',$(obj).text()) });
 
-let url = new URL(window.location.href);
 switch_theme(url.searchParams.get('theme'));
 
-if (url.searchParams.get('md') === 'true'){
+if (url.searchParams.get('md') === '1'){
 	$('#check_markdown').attr('checked',true);
 }
 
@@ -73,6 +74,22 @@ for (let i = 0; i < f.length-1; i++){
 	add_font(f[i]);
 }
 
+if (url.searchParams.get('winb') === '0'){
+	$('#check_winborder').attr('checked',false);
+	toggle_winborder();
+}
+
 $('#check_markdown').change( () => {
-	ipc.send('app','toggle_markdown');
+	ipc.send('app','toggle-markdown');
 });
+
+$('#check_winborder').change( () => {
+	toggle_winborder();
+	ipc.send('app','toggle-winborder');
+});
+
+$('#font_size_input').keyup( () => {
+	ipc.send('app','font-size=' + $('#font_size_input').val() );
+});
+
+$('#font_size_input').val(url.searchParams.get('size'));
