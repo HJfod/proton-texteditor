@@ -11,6 +11,8 @@ let theme_current = 'midnight';
 let fonts = '';
 let default_fonts = ['Segoe UI Light','Roboto Light','Arial'];
 let font_size = 16;
+let documents = [];
+let current = 0;
 
 $(document).mousemove( (e) => {
 	mouse_x = e.pageX;
