@@ -16,7 +16,9 @@ function switch_theme(to){
 				menusep: 'rgba(255,255,255,0.2)',
 				menubg: 'rgb(0,0,0)',
 				cbox: 'rgb(100,100,100)',
-				cboxu: 'rgb(20,20,20)'
+				cboxu: 'rgb(20,20,20)',
+				bhover: 'rgba(255,255,255,0.2)',
+				mhover: 'rgba(80,80,80,1)'
 			};
 			break;
 		case 'ruska':
@@ -33,7 +35,9 @@ function switch_theme(to){
 				menusep: 'rgba(255,200,220,0.2)',
 				menubg: 'rgb(4,2,4)',
 				cbox: 'rgb(120,30,45)',
-				cboxu: 'rgb(20,20,20)'
+				cboxu: 'rgb(20,20,20)',
+				bhover: 'rgba(255,235,255,0.2)',
+				mhover: 'rgba(100,80,85,1)'
 			};
 			break;
 		case 'light':
@@ -50,7 +54,9 @@ function switch_theme(to){
 				menusep: 'rgba(0,0,0,0.5)',
 				menubg: 'rgb(235,235,235)',
 				cbox: 'rgb(200,200,200)',
-				cboxu: 'rgb(230,230,230)'
+				cboxu: 'rgb(230,230,230)',
+				bhover: 'rgba(120,120,120,0.2)',
+				mhover: 'rgba(180,180,180,1)'
 			};
 			break;
 		case 'ocean':
@@ -67,7 +73,9 @@ function switch_theme(to){
 				menusep: 'rgba(255,200,220,0.2)',
 				menubg: 'rgb(0,3,14)',
 				cbox: 'rgb(15,50,150)',
-				cboxu: 'rgb(20,20,20)'
+				cboxu: 'rgb(20,20,20)',
+				bhover: 'rgba(255,255,255,0.2)',
+				mhover: 'rgba(80,80,105,1)'
 			};
 			break;
 		case 'spring':
@@ -84,7 +92,9 @@ function switch_theme(to){
 				menusep: 'rgba(255,200,220,0.2)',
 				menubg: 'rgb(25,25,25)',
 				cbox: 'rgb(81,110,105)',
-				cboxu: 'rgb(20,20,20)'
+				cboxu: 'rgb(20,20,20)',
+				bhover: 'rgba(255,255,255,0.2)',
+				mhover: 'rgba(80,105,105,1)'
 			};
 			break;
 	}
@@ -101,4 +111,6 @@ function switch_theme(to){
 	html.style.setProperty('--gui-color-menu-background',scheme.menubg);
 	html.style.setProperty('--gui-color-checkbox',scheme.cbox);
 	html.style.setProperty('--gui-color-checkbox-unchecked',scheme.cboxu);
+	html.style.setProperty('--gui-color-button-hover',scheme.bhover);
+	html.style.setProperty('--gui-color-menu-hover',scheme.mhover);
 }
