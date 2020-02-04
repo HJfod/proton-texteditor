@@ -1,8 +1,11 @@
 function switch_doc(to){
+	documents[current] = $('#writing_area').text();
 	$('.tab').attr('class','tab');
 	$('#tab' + to).attr('class','tab selected');
 	$('.option_tab').hide();
 	$('#tab' + to).show();
+	current = to;
+	$('#writing_area').text() = documents[to];
 }
 
 function new_doc(){
