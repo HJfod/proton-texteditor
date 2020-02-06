@@ -17,7 +17,7 @@ function new_doc(nam = 'New', txt = '', pth = ''){
 		}
 	}
 	let n_t = document.createElement('button');
-	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).attr('data-menu',String.raw`Rename\\rename_doc(`+t_c+String.raw`)//Close\\close_doc(`+t_c+`)`).insertBefore($('#tabnew'));
+	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam+t_c).attr('id','tab'+t_c).attr('data-menu',String.raw`Rename\\rename_doc(`+t_c+String.raw`)//Close\\close_doc(`+t_c+`)`+String.raw`//Details\\info_doc(`+t_c+`)`).insertBefore($('#tabnew'));
 	documents[t_c] = { name: nam, contents: txt, path: pth };
 	switch_doc(t_c);
 }
@@ -42,6 +42,26 @@ function rename_doc(which) {
 			});
 		}
 	});
+}
+
+function info_doc(which){
+	let doc = documents[which].contents;
+	if (which === current){
+		doc = $('#writing_area').html();
+	}
+	let div = document.createElement('div');
+	let d = $(div).html(doc.replace(/<div>/g,'\n')).text();
+	$(div).remove();
+	console.log(documents[which].path);
+	
+	let w_s = d.split(' ').length;
+	if (d === ''){
+		w_s = 0;
+	}
+	let c_s = d.length;
+	let c_ns = d.replace(/\s/g,'').length;
+	
+	window.open('info.html?theme=' + theme_current + '&words=' + w_s + '&char=' + c_s + '&charns=' + c_ns + '&winb=' + $('#option_border').css('opacity') + '&path=' + documents[which].path,'','width=400,height=200');
 }
 
 function close_doc(which) {

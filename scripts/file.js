@@ -8,6 +8,10 @@ function download(filename, text) {
 	
 	element.click();
 	
+	$(element).change(() => {
+		console.log('s');
+	});
+	
 	document.body.removeChild(element);
 }
 
@@ -19,7 +23,9 @@ function save_project(e = 0) {
 	if (e){
 		download(documents[current].name, $('#writing_area').text());
 	}else{
-		download(documents[current].name, $('#writing_area').html());
+		if (documents[current].path === ''){
+			download(documents[current].name, $('#writing_area').html());
+		}
 	}
 }
 

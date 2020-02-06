@@ -143,13 +143,6 @@ body {
 	position: absolute;
 }
 
-.home_info {
-	font-family: var(--gui-button-home-font);
-	color: var(--gui-color-title-new);
-	left: var(--gui-size-margin);
-	position: absolute;
-}
-
 .textarea {
 	background-color: var(--gui-color-background);
 	position: absolute;
@@ -495,4 +488,8 @@ body {
 .option_a:hover {
 	cursor: pointer;
 	color: var(--gui-color-button-text);
+}
+
+.info_text {
+	opacity: 0.8;
 }

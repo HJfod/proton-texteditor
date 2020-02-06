@@ -12,7 +12,6 @@ function colourText(how = 0) {
 				let d;
 				if (!i){ d = 'getComputedStyle(html).getPropertyValue("' +  c[i].replace('var(','').replace(')','') + '")' }else{ d = '"' + c[i] + '"' }
 				n_o.setAttribute('onmouseup','document.execCommand("foreColor",false,' + d + '); $("font").attr("data-menu",$("#writing_area").attr("data-menu")); $("#menu_select").hide().empty()');
-				console.log($(n_o).attr('onmouseup'));
 				m.append(n_o);
 			}
 			let l = Number($('#menu_window').css('left').replace('px','')) + Number($('#menu_window').css('width').replace('px',''));
