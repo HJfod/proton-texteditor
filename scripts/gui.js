@@ -71,16 +71,33 @@ ipc.on('app', (event, arg) => {
 	}
 });
 
+var map = {};
 $(document).mouseup( () => {
 	close_menu();
-}).keypress( () => {
+}).keydown((e) => {
 	close_menu();
+	map[e.which] = true;
+	if (map[key.ctrl] + map[key.sup]){
+		e.preventDefault();
+		colourText(4);
+	}
+	if (map[key.ctrl] + map[key.sub]){
+		e.preventDefault();
+		colourText(5);
+	}
+}).keyup((e) => {
+	delete map[e.which];
 });
 
 $('[data-menu]').contextmenu( (e) => {
+	e.preventDefault();
 	let m = $('#menu_window');
 	
-	let v = $(e.target).attr('data-menu');
+	let ta = $(e.target);
+	if (ta.attr('data-menu') == undefined){
+		ta = $(e.target).parent();
+	}
+	let v = ta.attr('data-menu');
 	v = v.split('//');
 	
 	for (let i = 0; i < v.length; i++){

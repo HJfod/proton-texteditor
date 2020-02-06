@@ -12,17 +12,15 @@ function download(filename, text) {
 }
 
 function new_project() {
-	$('#writing_area').text('');
+	new_doc();
 }
 
 function save_project(e = 0) {
-	if (opened_project.name == ''){
-		name = 'unnamed';
+	if (e){
+		download(documents[current].name, $('#writing_area').text());
 	}else{
-		name = opened_project.name;
+		download(documents[current].name, $('#writing_area').html());
 	}
-	
-	download(name, document.getElementById('writing_area').innerHTML);
 }
 
 $('#project_loader').change( () => {
@@ -35,18 +33,18 @@ function load_project() {
 	}
 	
 	let reader = new FileReader();
-	let fileInput = document.getElementById('project_loader');
+	let fi = document.getElementById('project_loader');
 	
-	let file = fileInput.files[0];
-	let textType = /text.*/;
-	
-	reader.readAsText(file);
-	reader.onload = function(e) {
-		document.getElementById('writing_area').innerHTML = reader.result;
-		opened_project.path = file.path;
-		opened_project.name = file.name;
+	for (let i = 0; i < fi.files.length; i++){
+		let file = fi.files[i];
+		let textType = /text.*/;
+		
+		reader.readAsText(file);
+		reader.onload = function(e) {
+			new_doc(file.name,reader.result,file.path);
+		}
 	}
 	
-	fileInput.value = null;
+	fi.value = null;
 	return;
 }

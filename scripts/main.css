@@ -138,10 +138,16 @@ body {
 .home_gog {
 	opacity: 0.3;
 	width: 10px;
-	top: 55%;
-	position: absolute;
+	bottom: calc( var(--gui-size-option) / 3 );
 	left: var(--gui-home-gog);
-	transform: translateY(-50%);
+	position: absolute;
+}
+
+.home_info {
+	font-family: var(--gui-button-home-font);
+	color: var(--gui-color-title-new);
+	left: var(--gui-size-margin);
+	position: absolute;
 }
 
 .textarea {
@@ -471,4 +477,22 @@ body {
 
 .hidden {
 	opacity: 0;
+}
+
+.option_a {
+	color: #aad;
+	transition-duration: var(--gui-transition-time);
+}
+
+.option_a.green {
+	color: #ada;
+}
+
+.option_a.red {
+	color: #daa;
+}
+
+.option_a:hover {
+	cursor: pointer;
+	color: var(--gui-color-button-text);
 }

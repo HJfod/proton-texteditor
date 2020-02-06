@@ -20,6 +20,11 @@
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
+		<div style='width: 100%; height: 100px'>
+			
+			<text class='home_info' id='home_info'>Information</text>
+			
+		</div>
 		
 		<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
 		
@@ -43,13 +48,17 @@
 
 <div id='markdown' class='panel markdown'>
 	
-	<button class='markbutton' onclick='colourText(1)'>𝐁</button>
+	<button class='markbutton' onclick='colourText(1)'><b>B</b></button>
 	
-	<button class='markbutton' onclick='colourText(2)'>𝑖</button>
+	<button class='markbutton' onclick='colourText(2)'><i>i</i></button> <!--𝐁𝑖U̲-->
 	
-	<button class='markbutton' onclick='colourText(3)'>U̲</button>
+	<button class='markbutton' onclick='colourText(3)'><u>U</u></button>
 	
 	<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
+	
+	<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
+	
+	<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
 	
 </div>
 
@@ -61,7 +70,7 @@
 
 <div id='textarea' class='textarea'>
 	
-	<text class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color<span class="menu_arrow" style="left: 50px">»</span>\\colourText(0)//---//Settings \\open_settings();'></text>
+	<div class='writing_area' id='writing_area' contenteditable='true' data-menu='<b>Bold</b>\\colourText(1)//<i>Italics</i>\\colourText(2)//<u>Underline</u>\\colourText(3)//Color<span class="menu_arrow" style="left: 50px">»</span>\\colourText(0)//---//Settings \\open_settings();'></div>
 	
 </div>
 

@@ -28,8 +28,11 @@ function colourText(how = 0) {
 		case 3:
 			document.execCommand('underline');
 			break;
+		case 4:
+			document.execCommand('superscript');
+			break;
+		case 5:
+			document.execCommand('subscript');
+			break;
 	}
-	['b','i','u'].forEach((tag) => {
-		$(tag).attr('data-menu',$('#writing_area').attr('data-menu'));
-	});
 }
