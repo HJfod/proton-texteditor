@@ -12,11 +12,9 @@
 	
 	<button class='home_button' onclick='new_project();'>New file</button>
 	
-	<button class='home_button' onclick='save_project();'>Save file</button>
+	<button class='home_button' onclick='save_project(2);'>Save file<span class='menu_arrow'>&nbsp;»</span></button>
 	
 	<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
-	
-	<button class='home_button' onclick='save_project(1);'>Export file</button>
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
@@ -54,9 +52,13 @@
 	
 	<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
 	
+	<button class='markbutton' onclick='selectUnicode()'>印</button>
+	
 </div>
 
-<div id='tabs' class='tabs app' data-menu='New file\\new_doc()'>
+<div id='tabs' class='tabs app' data-menu='New file\\new_doc()//Show markdown\\toggle_markdown()'>
+
+	<div class='tabs_border'></div>
 	
 	<button onclick='new_doc()' class='tab add' id='tabnew'>+</button>
 	

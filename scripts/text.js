@@ -11,7 +11,7 @@ function colourText(how = 0) {
 				n_o.setAttribute('style','color: ' + c[i]);
 				let d;
 				if (!i){ d = 'getComputedStyle(html).getPropertyValue("' +  c[i].replace('var(','').replace(')','') + '")' }else{ d = '"' + c[i] + '"' }
-				n_o.setAttribute('onmouseup','document.execCommand("foreColor",false,' + d + '); $("font").attr("data-menu",$("#writing_area").attr("data-menu")); $("#menu_select").hide().empty()');
+				n_o.setAttribute('onmouseup','document.execCommand("foreColor",false,' + d + '); $("#menu_select").hide().empty()');
 				m.append(n_o);
 			}
 			let l = Number($('#menu_window').css('left').replace('px','')) + Number($('#menu_window').css('width').replace('px',''));
@@ -34,4 +34,20 @@ function colourText(how = 0) {
 			document.execCommand('subscript');
 			break;
 	}
+}
+
+function selectUnicode() {
+	let m = $('#menu_select');
+	m.empty();
+	let c = ['\u2022'];
+	for (let i = 0; i < c.length; i++){
+		let n_o = document.createElement('button');
+		n_o.innerHTML = c[i];
+		n_o.setAttribute('class','menu_option wide');
+		n_o.setAttribute('onmouseup','$("writing_area").focus(); document.execCommand("insertText",false,"' + c[i] + '"); $("#menu_select").hide().empty()');
+		m.append(n_o);
+	}
+	let l = Number($('#menu_window').css('left').replace('px','')) + Number($('#menu_window').css('width').replace('px',''));
+	m.css('left',l).css('top',mouse_y);
+	m.show();
 }

@@ -20,12 +20,16 @@ function new_project() {
 }
 
 function save_project(e = 0) {
-	if (e){
-		download(documents[current].name, $('#writing_area').text());
-	}else{
-		if (documents[current].path === ''){
+	switch (e){
+		case 0:
 			download(documents[current].name, $('#writing_area').html());
-		}
+			break;
+		case 1:
+			download(documents[current].name, $('#writing_area').text());
+			break;
+		case 2:
+			
+			break;
 	}
 }
 

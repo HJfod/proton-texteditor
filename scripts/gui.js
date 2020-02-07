@@ -29,6 +29,16 @@ function toggle_winborder() {
 	}
 }
 
+function toggle_markdown() {
+	if ($('#markdown').css('opacity') === '0'){
+		$('#markdown').css('opacity','1');
+		html.style.setProperty('--gui-size-markdown','var(--gui-size-markdown-length)');
+	}else{
+		$('#markdown').css('opacity','0');
+		html.style.setProperty('--gui-size-markdown','0px');
+	}
+}
+
 function open_settings() {
 	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&winb=' + $('#option_border').css('opacity') + '&size=' + font_size,'','width=400,height=400');
 }
@@ -47,13 +57,7 @@ ipc.on('app', (event, arg) => {
 			switch_theme(a[1]);
 			break;
 		case 'toggle-markdown':
-			if ($('#markdown').css('opacity') === '0'){
-				$('#markdown').css('opacity','1');
-				html.style.setProperty('--gui-size-markdown','var(--gui-size-markdown-length)');
-			}else{
-				$('#markdown').css('opacity','0');
-				html.style.setProperty('--gui-size-markdown','0px');
-			}
+			toggle_markdown();
 			break;
 		case 'change-font':
 			html.style.setProperty('--gui-text-font',a[1]);
@@ -94,9 +98,17 @@ $('[data-menu]').contextmenu( (e) => {
 	let m = $('#menu_window');
 	
 	let ta = $(e.target);
-	if (ta.attr('data-menu') == undefined){
-		ta = $(e.target).parent();
+	
+	let i = 0;
+	while (ta.attr('data-menu') == undefined){
+		if (i < 50){
+			i++;
+		}else{
+			return false;
+		}
+		ta = ta.parent();
 	}
+	
 	let v = ta.attr('data-menu');
 	v = v.split('//');
 	

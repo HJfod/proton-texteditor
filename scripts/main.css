@@ -290,12 +290,12 @@ body {
 	top: var(--gui-size-titlebar);
 	height: var(--gui-size-tab);
 	width: 100%;
-	border-bottom: 1px solid var(--gui-color-tab-border);
+	border: none;
 	display: inline-block;
-	z-index: 3;
 	overflow-y: hidden;
 	overflow-x: auto;
 	box-sizing: border-box;
+	z-index: 3;
 }
 
 .tabs.app {
@@ -305,8 +305,19 @@ body {
 	transition-duration: var(--gui-transition-time-long);
 }
 
+.tabs_border {
+	background-color: var(--gui-color-background);
+	position: absolute;
+	display: inline;
+	height: calc( var(--gui-size-tab) - 1px );
+	width: 100%;
+	border-bottom: 1px solid var(--gui-color-tab-border);
+	z-index: -1;
+	float: left;
+}
+
 .tab {
-	background-color: var(--gui-color-menu-background);
+	background-color: rgba(0,0,0,0);
 	border: none;
 	color: var(--gui-color-button-text);
 	height: 100%;
@@ -317,7 +328,7 @@ body {
 	margin: none;
 	border: 1px solid rgba(0,0,0,0);
 	transition-duration: var(--gui-transition-time);
-	z-index: 3;
+	z-index: 8;
 }
 
 .tab:hover {
@@ -328,7 +339,7 @@ body {
 	background-color: var(--gui-color-background);
 	border: 1px solid var(--gui-color-tab-border);
 	border-bottom: 1px solid rgba(0,0,0,0);
-	z-index: 5;
+	z-index: 9;
 }
 
 .tab.selected:hover {
