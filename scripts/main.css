@@ -38,6 +38,7 @@
 	--gui-size-markdown-length:		20px;
 	--gui-size-checkbox-corner:		3px;
 	--gui-size-text:				16px;
+	--gui-size-unicode-menu:		8;
 	
 	--gui-transition-time:			0.1s;
 	--gui-transition-time-long:		0.5s;
@@ -228,6 +229,10 @@ body {
 	-webkit-app-region: no-drag;
 }
 
+.menu_window.unicode {
+	width: calc( var(--gui-size-menu-text) * ( var(--gui-size-unicode-menu) * 2 ) );
+}
+
 .menu_option {
 	background-color: rgba(0,0,0,0);
 	border: none;
@@ -245,6 +250,19 @@ body {
 	padding-right: var(--gui-size-menu-pad-left);
 }
 
+.menu_option.wide {
+	padding-right: calc( var(--gui-size-menu-pad-left) * 2);
+	padding-left: calc( var(--gui-size-menu-pad-left) * 2);
+}
+
+.menu_option.unicode {
+	width: calc( var(--gui-size-menu-text) * 2);
+	display: initial;
+	padding: 0px;
+	flex-direction: initial;
+	text-align: center;
+}
+
 .menu_separator {
 	background-color: rgba(0,0,0,0);
 	border: none;
@@ -259,11 +277,6 @@ body {
 	padding: var(--gui-size-menu-pad);
 	padding-left: var(--gui-size-menu-pad-left);
 	padding-right: var(--gui-size-menu-pad-left);
-}
-
-.menu_option.wide {
-	padding-right: calc( var(--gui-size-menu-pad-left) * 2);
-	padding-left: calc( var(--gui-size-menu-pad-left) * 2);
 }
 
 .menu_option:hover {

@@ -138,9 +138,10 @@ $('[data-menu]').contextmenu( (e) => {
 });
 
 function close_menu() {
-	let t = $('#menu_select').is(':hidden'), t2 = $('#menu_window').is(':hover');
-	if (t || !t2){
+	let t = $('#menu_select').is(':hidden'), t2 = $('#menu_window').is(':hover'), t3 = $('#menu_window').is(':hidden');
+	if (t || !t2 || t3){
 		$('#menu_window').hide().empty();
 		$('#menu_select').hide().empty();
+		if ($('#menu_select').hasClass('unicode')){ $('#menu_select').removeClass('unicode') }
 	}
 }
