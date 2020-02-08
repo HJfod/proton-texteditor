@@ -24,8 +24,12 @@ function switch_tab(to){
 }
 
 function option_switch_theme(to) {
-	ipc.send('app','change-theme=' + to);
-	switch_theme(to);
+	if (to === 'custom'){
+		window.open('theme.html?theme=' + theme_current + '&winb=' + $('#option_border').css('opacity'),'','width=350,height=350');
+	}else{
+		ipc.send('app','change-theme=' + to);
+		switch_theme(to);
+	}
 }
 
 function switch_font(to) {
@@ -63,7 +67,7 @@ for (let i = 0; i < default_fonts.length; i++){
 
 $('.selector.font').each((i, obj) => { $(obj).css('font-family',$(obj).text()) });
 
-switch_theme(url.searchParams.get('theme'));
+switch_theme(url.searchParams.get('theme').split('>'));
 
 if (url.searchParams.get('md') === '1'){
 	$('#check_markdown').attr('checked',true);

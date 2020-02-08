@@ -72,6 +72,9 @@ ipc.on('app', (event, arg) => {
 			html.style.setProperty('--gui-size-text',a[1] + 'px');
 			font_size = a[1];
 			break;
+		case 'custom-theme':
+			switch_theme('custom',a[1]);
+			break;
 	}
 });
 
@@ -81,13 +84,16 @@ $(document).mouseup( () => {
 }).keydown((e) => {
 	close_menu();
 	map[e.which] = true;
-	if (map[key.ctrl] + map[key.sup]){
-		e.preventDefault();
-		colourText(4);
-	}
-	if (map[key.ctrl] + map[key.sub]){
-		e.preventDefault();
-		colourText(5);
+	
+	switch (Object.keys(map).join(',')) {
+		case key.ctrl + ',' + key.sup:
+			e.preventDefault();
+			colourText(4);
+			break;
+		case key.ctrl + ',' + key.sub:
+			e.preventDefault();
+			colourText(5);
+			break;
 	}
 }).keyup((e) => {
 	delete map[e.which];

@@ -1,4 +1,10 @@
-function switch_theme(to){
+function switch_theme(to,cont=''){
+	if (Array.isArray(to)){
+		cont = to[1];
+		to = to[0].toString();
+		console.log(to);
+		console.log(cont);
+	}
 	theme_current = to;
 	let scheme;
 	switch (to) {
@@ -96,6 +102,16 @@ function switch_theme(to){
 				bhover: 'rgba(255,255,255,0.2)',
 				mhover: 'rgba(80,105,105,1)'
 			};
+			break;
+		case 'custom':
+			scheme = {};
+			theme_current = 'custom>' + cont;
+			cont = cont.replace(/\s/g, '');
+			cont = cont.split(';');
+			for (let i = 0; i < cont.length; i++) {
+				cont[i] = cont[i].split(':');
+				scheme[cont[i][0]] = cont[i][1];
+			}
 			break;
 	}
 	html.style.setProperty('--gui-color-titlebar',scheme.tb);

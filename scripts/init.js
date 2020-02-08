@@ -13,7 +13,7 @@ let default_fonts = ['Segoe UI Light','Roboto Light','Arial'];
 let font_size = 16;
 let documents = [];
 let current = 0;
-let key = { ctrl: 17, sup: 186, sub: 189 };
+let key = { ctrl: 17, sup: 186, sub: 189, shift: 16, tab: 9 };
 
 $(document).mousemove( (e) => {
 	mouse_x = e.pageX;

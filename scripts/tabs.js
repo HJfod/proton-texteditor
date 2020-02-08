@@ -52,7 +52,6 @@ function info_doc(which){
 	let div = document.createElement('div');
 	let d = $(div).html(doc.replace(/<div>/g,'\n')).text();
 	$(div).remove();
-	console.log(documents[which].path);
 	
 	let w_s = d.split(' ').length;
 	if (d === ''){

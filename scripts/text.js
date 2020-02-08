@@ -14,8 +14,13 @@ function colourText(how = 0) {
 				n_o.setAttribute('onmouseup','document.execCommand("foreColor",false,' + d + '); $("#menu_select").hide().empty()');
 				m.append(n_o);
 			}
+			if ($('#menu_window').is(':hidden')){
+				t = $('#textarea').css('top');
+			}else{
+				t = mouse_y;
+			}
 			let l = Number($('#menu_window').css('left').replace('px','')) + Number($('#menu_window').css('width').replace('px',''));
-			m.css('left',l).css('top',mouse_y);
+			m.css('left',l).css('top',t);
 			m.show();
 			break;
 		case 1:
@@ -32,6 +37,9 @@ function colourText(how = 0) {
 			break;
 		case 5:
 			document.execCommand('subscript');
+			break;
+		case 6:
+			document.execCommand('strikeThrough');
 			break;
 	}
 }
@@ -53,7 +61,7 @@ function selectUnicode() {
 	'\u03b1','\u03b2','\u03b4','\u03b5','\u03b8','\u0394',
 	'\u03bb','\u03bc','\u03c0','\u03c6','\u03c8',
 	'\u03a9','\u212f','\u221e','\u221a','\u2248',
-	'\u2260','\u22c0','\u22c1','\u2221','\u00b1',				// math
+	'\u2260','\u22c0','\u22c1','\u2221','\u00b1','\u00b0',		// math
 	'\u{1f60e}','\u{1f60a}','\u{1f603}','\u{1f602}','\u{1f920}',
 	'\u{1f921}','\u{1f609}','\u{1f61b}','\u{1f914}','\u{1f633}',
 	'\u{1f622}','\u{1f62a}','\u{1f630}','\u{1f922}','\u{1f624}',

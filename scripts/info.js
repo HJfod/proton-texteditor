@@ -1,6 +1,6 @@
 let url = new URL(window.location.href);
 
-switch_theme(url.searchParams.get('theme'));
+switch_theme(url.searchParams.get('theme').split('>'));
 
 if (url.searchParams.get('winb') === '0'){
 	$('#check_winborder').attr('checked',false);
