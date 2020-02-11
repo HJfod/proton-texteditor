@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Settings</title>
 <meta charset='UTF-8'/>
 <link rel='stylesheet' href='scripts/main.css'/>
 </head>
@@ -65,6 +64,17 @@
 	<text>Text size</text><br>
 	
 	<input class='selector' id='font_size_input' maxlength=4 size=1></input><text>px</text>
+	
+	<br><br>
+	
+	<text>Text colors</text><br>
+	<div class='select' id='color_select' data-menu=''>
+		<button class='selector color' onclick='add_color("Custom")' id='c_cu'>+</button>
+	</div>
+	<div class='select' id='color_select_c'>
+		<input class='selector' id='custom_color_input'></input>
+		<button class='selector' onclick='add_color($("#custom_color_input").val());'>Add</button>
+	</div>
 	
 </div>
 

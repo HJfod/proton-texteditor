@@ -3,7 +3,8 @@ function colourText(how = 0) {
 		case 0:
 			let m = $('#menu_select');
 			m.empty();
-			let c = ['var(--gui-color-text-default)','#f00','#0f0','#00f','#0ff'];
+			let c = colors.toString().replace(/%23/g,'#').split(';');
+			c.splice(0,0,'var(--gui-color-text-default)');
 			for (let i = 0; i < c.length; i++){
 				let n_o = document.createElement('button');
 				n_o.innerHTML = '\u25a0';

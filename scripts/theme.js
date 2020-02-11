@@ -2,8 +2,6 @@ function switch_theme(to,cont=''){
 	if (Array.isArray(to)){
 		cont = to[1];
 		to = to[0].toString();
-		console.log(to);
-		console.log(cont);
 	}
 	theme_current = to;
 	let scheme;

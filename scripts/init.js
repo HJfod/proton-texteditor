@@ -8,12 +8,15 @@ var mouse_x = 0, mouse_y = 0;
 
 let home_toggled = false;
 let theme_current = 'midnight';
-let fonts = '';
 let default_fonts = ['Segoe UI Light','Roboto Light','Arial'];
+let fonts = '';
+let colors = '';
 let font_size = 16;
 let documents = [];
 let current = 0;
 let key = { ctrl: 17, sup: 186, sub: 189, shift: 16, tab: 9 };
+
+let url = new URL(window.location.href);
 
 $(document).mousemove( (e) => {
 	mouse_x = e.pageX;

@@ -1,18 +1,28 @@
 $('.option_tab').hide();
 $('#o_tab0').show();
 $('#font_select_c').hide();
-
-let url = new URL(window.location.href);
+$('#color_select_c').hide();
 
 function options_close() {
 	let t = '';
+	let c = '';
 	$('.selector.font').each((i,obj) => {
-		if (i < 3 || i > $('.selector.font').length - 2){
+		if (i < default_fonts.length || i > $('.selector.font').length - 2){
 			return true;
 		}
 		t += $(obj).text() + ',';
 	});
+	$('.selector.color').each((i,obj) => {
+		if (i > $('.selector.color').length - 2){
+			return true;
+		}
+		c += $(obj).css('color');
+		if (i < $('.selector.color').length - 2){
+			c += ';';
+		}
+	});
 	ipc.send("app","fonts=" + t);
+	ipc.send("app","colors=" + c);
 	window.close();
 }
 
@@ -41,6 +51,23 @@ function switch_font(to) {
 	}
 }
 
+function add_color(t) {
+	if (t === 'Custom'){
+		$('#color_select').hide();
+		$('#color_select_c').show();
+		return true;
+	}
+	t = t.replace(/%23/g,'#');
+	$('#color_select').show();
+	$('#color_select_c').hide();
+	let n_o = document.createElement('button');
+	$(n_o).attr('class','selector color');
+	$(n_o).text('\u25a0');
+	$(n_o).attr('data-menu',String.raw`Delete\\delete_color("` + t + `")`);
+	$(n_o).css('color',t);
+	$(n_o).insertBefore($('#c_cu'));
+}
+
 function add_font(t) {
 	$('#font_select').show();
 	$('#font_select_c').hide();
@@ -61,6 +88,14 @@ function delete_font(t) {
 	});
 }
 
+function delete_color(t) {
+	$('.selector.color').each((i,obj) => {
+		if ($(obj).css('color') == t){
+			$(obj).remove();
+		}
+	});
+}
+
 for (let i = 0; i < default_fonts.length; i++){
 	add_font(default_fonts[i]);
 }
@@ -76,6 +111,11 @@ if (url.searchParams.get('md') === '1'){
 let f = url.searchParams.get('fonts').split(',');
 for (let i = 0; i < f.length-1; i++){
 	add_font(f[i]);
+}
+
+let c = url.searchParams.get('colors').split(';');
+for (let i = 0; i < c.length; i++){
+	add_color(c[i]);
 }
 
 if (url.searchParams.get('winb') === '0'){

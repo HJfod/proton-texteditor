@@ -40,7 +40,8 @@ function toggle_markdown() {
 }
 
 function open_settings() {
-	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&winb=' + $('#option_border').css('opacity') + '&size=' + font_size,'','width=400,height=400');
+	console.log(colors);
+	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&size=' + font_size,'','width=400,height=400');
 }
 
 ipc.on('app', (event, arg) => {
@@ -64,6 +65,9 @@ ipc.on('app', (event, arg) => {
 			break;
 		case 'fonts':
 			fonts = a[1];
+			break;
+		case 'colors':
+			colors = a[1];
 			break;
 		case 'toggle-winborder':
 			toggle_winborder();
