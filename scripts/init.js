@@ -15,6 +15,7 @@ let font_size = 16;
 let documents = [];
 let current = 0;
 let key = { ctrl: 17, sup: 186, sub: 189, shift: 16, tab: 9 };
+let max_tabs = 5;
 
 let url = new URL(window.location.href);
 

@@ -9,6 +9,10 @@ function switch_doc(to){
 }
 
 function new_doc(nam = 'Unnamed.txt', txt = '', pth = ''){
+	if ($('#tabs').children().length-2 >= max_tabs){
+		return true;
+	}
+	
 	let t_c = 0;
 	for (let i = 1; i < $('#tabs').children().length; i++){
 		if ($($('#tabs').children().get(i-1)).attr('id') == 'tab' + t_c){
@@ -71,7 +75,20 @@ function close_doc(which) {
 		}
 	});
 	if ($('#tabs').children().length == 2){
+		$('#writing_area').text('');
 		new_doc();
 	}
-	switch_doc(0);
+	
+	let j = which+1;
+	while (!($('#tab'+j).length)){
+		j -= 1;
+		if (j < 0){
+			console.log('h');
+			j = Number(($($('#tabs').children().get(1)).attr('id')).toString().replace('tab',''));
+			console.log(j);
+			break;
+		}
+	}
+	
+	switch_doc(j);
 }

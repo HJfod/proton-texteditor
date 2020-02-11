@@ -41,7 +41,7 @@ function toggle_markdown() {
 
 function open_settings() {
 	console.log(colors);
-	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&size=' + font_size,'','width=400,height=400');
+	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size,'','width=400,height=400');
 }
 
 ipc.on('app', (event, arg) => {
@@ -78,6 +78,9 @@ ipc.on('app', (event, arg) => {
 			break;
 		case 'custom-theme':
 			switch_theme('custom',a[1]);
+			break;
+		case 'max-tabs':
+			max_tabs = a[1];
 			break;
 	}
 });

@@ -25,10 +25,14 @@ function save_project(e = 0) {
 			download(documents[current].name, $('#writing_area').html());
 			break;
 		case 1:
-			download(documents[current].name, $('#writing_area').text());
+			let doc = $('#writing_area').html();
+			let div = document.createElement('div');
+			let d = $(div).html(doc.replace(/<div>/g,'\n')).text();
+			$(div).remove();
+			download(documents[current].name, d);
 			break;
 		case 2:
-			
+			download(documents[current].name, $('#writing_area').html());
 			break;
 	}
 }

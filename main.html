@@ -10,15 +10,27 @@
 
 <div id='home' class='panel home'>
 	
-	<button class='home_button' onclick='new_project();'>New file</button>
+	<span title='Create new file' class='help_menu'>
+		<button class='home_button' onclick='new_project();'>New file</button>
+	</span>
 	
-	<button class='home_button' onclick='save_project(0);'>Save file<span class='menu_arrow'>&nbsp;»</span></button>
+	<span title='Save current file' class='help_menu'>
+		<button class='home_button' onclick='save_project(0);'>Save file</button>	<!--<span class='menu_arrow'>&nbsp;»</span>-->
+	</span>
 	
-	<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
+	<span title='Open a file' class='help_menu'>
+		<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
+	</span>
+	
+	<span title='Save current file as plain text' class='help_menu'>
+		<button class='home_button' onclick='save_project(1);'>Export file</button>
+	</span>
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
-		<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
+		<span title='Settings' class='help_menu'>
+			<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
+		</span>
 		
 	</div>
 	
@@ -26,40 +38,64 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Open file\\$("#project_loader").click();' onclick='toggle_home();'>&#9750;</button>
+	<span title='Home' class='help_menu'>
+		<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\$("#project_loader").click();' onclick='toggle_home();'>&#9750;</button>
+	</span>
 	
 	<text id='title' class='title'>DarkPad</text>
 	
-	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
+	<span title='Close app' class='help_menu'>
+		<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
+	</span>
 	
-	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
+	<span title='Fullscreen' class='help_menu'>
+		<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
+	</span>
 	
-	<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
+	<span title='Minimize' class='help_menu'>
+		<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
+	</span>
 	
 </div>
 
 <div id='markdown' class='panel markdown'>
 	
-	<button class='markbutton' onclick='colourText(1)'><b>B</b></button>
+	<span title='Bold (Ctrl + B)' class='help_menu'>
+		<button class='markbutton' onclick='colourText(1)'><b>B</b></button>
+	</span>
 	
-	<button class='markbutton' onclick='colourText(2)'><i>i</i></button> <!--𝐁𝑖U̲-->
+	<span title='Italics (Ctrl + I)' class='help_menu'>
+		<button class='markbutton' onclick='colourText(2)'><i>i</i></button> <!--𝐁𝑖U̲-->
+	</span>
 	
-	<button class='markbutton' onclick='colourText(3)'><u>U</u></button>
+	<span title='Underline (Ctrl + U)' class='help_menu'>
+		<button class='markbutton' onclick='colourText(3)'><u>U</u></button>
+	</span>
 	
-	<button class='markbutton' onclick='colourText(6)'><s>abc</s></button>
+	<span title='Strikethrough' class='help_menu'>
+		<button class='markbutton' onclick='colourText(6)'><s>abc</s></button>
+	</span>
 	
-	<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
+	<span title='Color text' class='help_menu'>
+		<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
+	</span>
 	
-	<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
+	<span title='Superscript' class='help_menu'>
+		<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
+	</span>
 	
-	<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
+	<span title='Subscript' class='help_menu'>
+		<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
+	</span>
 	
-	<button class='markbutton' onclick='selectUnicode()'>文</button>
+	<span title='Add special characters' class='help_menu'>
+		<button class='markbutton' onclick='selectUnicode()'>文</button>
+	</span>
 	
 </div>
 
 <div id='tabs' class='tabs app' data-menu='New file\\new_doc()//Show markdown\\toggle_markdown()'>
-
+	
 	<div class='tabs_border'></div>
 	
 	<button onclick='new_doc()' class='tab add' id='tabnew'>+</button>

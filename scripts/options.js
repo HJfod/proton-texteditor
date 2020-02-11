@@ -136,4 +136,9 @@ $('#font_size_input').keyup( () => {
 	ipc.send('app','font-size=' + $('#font_size_input').val() );
 });
 
+$('#tab_size_input').keyup( () => {
+	ipc.send('app','max-tabs=' + $('#tab_size_input').val() );
+});
+
 $('#font_size_input').val(url.searchParams.get('size'));
+$('#tab_size_input').val(url.searchParams.get('mtabs'));
