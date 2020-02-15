@@ -9,8 +9,7 @@ window.onbeforeunload = (e) => {
 		docdata += '\n' + documents[i].name + ';docSeparator;' + documents[i].path;
 	}
 	
-	let dir = path.join(__dirname, 'userdata', 'savedata.txt');
-	fs.writeFile(dir, data + docdata, (err) => {
+	fs.writeFile('resources/savedata.txt', data + docdata, (err) => {
 		if (err) throw err;
 	});
 	

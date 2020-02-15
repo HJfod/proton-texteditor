@@ -1,6 +1,7 @@
 colors = '%23f00;%230f0;%2300f;%230ff';
 
-let dir = path.join(__dirname, 'userdata', 'savedata.txt');
+let dir = path.join(__dirname + '/..' + '/savedata.txt');
+console.log(dir);
 try {
 	fs.accessSync(dir);
 	
@@ -57,9 +58,11 @@ try {
 				console.error(err);
 			};
 		}
+	}else{
+		$('#status').text('• There was an error loading user data').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
 	}
 } catch (err) {
-	$('#status').text('• Savedata could not be found!').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
+	$('#status').text('• User data could not be found!').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
 	console.error(err);
 };
 

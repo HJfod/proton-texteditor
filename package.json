@@ -1,17 +1,19 @@
 {
-  "name": "darkpad",
+  "name": "Proton",
+  "productName": "Proton",
   "version": "1.0.0",
-  "description": "Python text editor",
+  "description": "Text editor made using Electron",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+	"package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=resources/pic.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Proton\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HJfod/darkpad.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "HJfod",
+  "license": "",
   "bugs": {
     "url": "https://github.com/HJfod/darkpad/issues"
   },
@@ -20,5 +22,8 @@
     "electron": "^7.1.11",
     "filereader": "^0.10.3",
     "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^14.2.1"
   }
 }

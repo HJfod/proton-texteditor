@@ -118,6 +118,7 @@ $(document).mouseup( () => {
 	close_menu();
 	map[e.which] = true;
 	
+	let th = true;
 	switch (Object.keys(map).join(',')) {
 		case key.ctrl + ',' + key.sup:
 			e.preventDefault();
@@ -127,6 +128,29 @@ $(document).mouseup( () => {
 			e.preventDefault();
 			colourText(5);
 			break;
+		case key.ctrl + ',' + key.s:
+			save_project(0);
+			break;
+		case key.ctrl + key.shift + ',' + key.s:
+			save_project(2);
+			break;
+		case key.ctrl + ',' + key.e:
+			save_project(1);
+			break;
+		case key.ctrl + ',' + key.o:
+			open_project();
+			break;
+		case key.ctrl + ',' + key.n:
+			new_project();
+			break;
+		case key.f1.toString():
+			open_settings();
+			break;
+		default:
+			th = false;
+	}
+	if (th){
+		map = {};
 	}
 }).keyup((e) => {
 	delete map[e.which];

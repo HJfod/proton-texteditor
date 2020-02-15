@@ -1,14 +1,16 @@
-const { BrowserWindow, app, dialog } = require('electron');
+const { BrowserWindow, app, dialog, Menu } = require('electron');
 const fs = require('fs');
 
 let window_main;
 let file_name;
 let file_path;
 
+process.env.NODE_ENV = 'production';
+
 app.on('ready', () => {
 	const ipc = require('electron').ipcMain;
 	
-	window_main = new BrowserWindow({ icon: 'resources/pic.png', frame: false, webPreferences: { nodeIntegration: true } });
+	window_main = new BrowserWindow({ icon: 'resources/pic.png', frame: false, webPreferences: { nodeIntegration: true, zoomFactor: 1.0 } });
 	
 	window_main.loadFile('main.html');
 	
@@ -95,6 +97,9 @@ app.on('ready', () => {
 	window_main.on('closed', () => {
 		app.quit();
 	});
+	
+	const m = Menu.buildFromTemplate(mainMenuTemplate);
+	Menu.setApplicationMenu(m);
 });
 
 function toggleFullscreen() {
@@ -119,3 +124,39 @@ function saveFile(arg) {
 		}
 	});
 }
+
+const mainMenuTemplate = [
+	{
+		label:'Home',
+		submenu: [
+			{
+				label: 'Fullscreen',
+				accelerator: 'F11',
+				click(){
+					toggleFullscreen();
+				}
+			},
+			{
+				label: 'Minimize',
+				accelerator: process.platform == 'darwin' ? 'Command+M' : 'Ctrl+M',
+				click(){
+					window_main.minimize();
+				}
+			},
+			{
+				label: 'Dev Tools',
+				accelerator: process.platform == 'darwin' ? 'Command+Shift+I' : 'Ctrl+Shift+I',
+				click(){
+					window_main.toggleDevTools();
+				}
+			},
+			{
+				label: 'Quit',
+				accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+				click(){
+					app.quit();
+				}
+			}
+		]
+	}
+];

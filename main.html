@@ -11,25 +11,25 @@
 
 <div id='home' class='panel home'>
 	
-	<span data-tool='Create new file'>
+	<span data-tool='Create new file (Ctrl + N)'>
 		<button class='home_button' onclick='new_project();'>New file</button>
 	</span>
 	
-	<span data-tool='Save current file'>
+	<span data-tool='Save current file (Ctrl + S)'>
 		<button class='home_button' onclick='save_project(0);'>Save file</button>	<!--<span class='menu_arrow'>&nbsp;»</span>-->
 	</span>
 	
-	<span data-tool='Open a file'>
+	<span data-tool='Open a file (Ctrl + O)'>
 		<button class='home_button' onclick='open_project();'>Open file</button>
 	</span>
 	
-	<span data-tool='Save current file as plain text'>
+	<span data-tool='Save current file as plain text (Ctrl + E)'>
 		<button class='home_button' onclick='save_project(1);'>Export file</button>
 	</span>
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
-		<span data-tool='Settings'>
+		<span data-tool='Settings (F1)'>
 			<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
 		</span>
 		
@@ -45,15 +45,15 @@
 	
 	<text id='title' class='title'>Proton<text id='status' class='title status'></text></text> <!--<img src='resources/pic.png' width=12></img>&nbsp;-->
 	
-	<span data-tool='Close app'>
+	<span data-tool='Close app (Alt + F4)'>
 		<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
 	</span>
 	
-	<span data-tool='Fullscreen'>
+	<span data-tool='Fullscreen (F11)'>
 		<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
 	</span>
 	
-	<span data-tool='Minimize'>
+	<span data-tool='Minimize (Ctrl + M)'>
 		<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
 	</span>
 	
@@ -81,11 +81,11 @@
 		<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
 	</span>
 	
-	<span data-tool='Superscript'>
+	<span data-tool='Superscript (Ctrl + ^)'>
 		<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
 	</span>
 	
-	<span data-tool='Subscript'>
+	<span data-tool='Subscript (Ctrl + _)'>
 		<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
 	</span>
 	
