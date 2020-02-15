@@ -1,0 +1,1 @@
+theme_current=spring&markdown=0&toolbox=false&fonts=&colors=rgb(255, 0, 0);rgb(0, 255, 0);rgb(0, 0, 255);rgb(0, 255, 255);rgb(255, 255, 0);rgb(255, 0, 255)&winb=1&mtabs=40&size=16

@@ -30,7 +30,9 @@
 	--gui-size-menu-pad-left:		6px;
 	--gui-size-option:				40px;
 	--gui-size-home-button:			16px;
-	--gui-size-tab:					25px;
+	--gui-size-tab-normal:			25px;
+	--gui-size-tab-big:				calc( var(--gui-size-margin) + var(--gui-size-tab-normal) );
+	--gui-size-tab:					var(--gui-size-tab-normal);
 	--gui-size-tab-text:			15px;
 	--gui-size-tab-pad:				8px;
 	--gui-size-checkbox:			20px;
@@ -187,6 +189,12 @@ body {
 	position: absolute;
 }
 
+.title.status {
+	top: 0px;
+	color: #0f0;
+	white-space: nowrap;
+}
+
 .button {
 	background-color: rgba(0,0,0,0);
 	position: absolute;
@@ -324,6 +332,7 @@ body {
 	overflow-y: hidden;
 	overflow-x: auto;
 	box-sizing: border-box;
+	white-space: nowrap;
 	z-index: 3;
 }
 
@@ -349,7 +358,7 @@ body {
 	background-color: rgba(0,0,0,0);
 	border: none;
 	color: var(--gui-color-button-text);
-	height: 100%;
+	height: var(--gui-size-tab-normal);
 	font-family: var(--gui-button-home-font);
 	font-size: var(--gui-size-tab-text);
 	padding-left: var(--gui-size-tab-pad);
@@ -491,6 +500,7 @@ body {
 
 ::-webkit-scrollbar {
 	width: var(--gui-size-margin);
+	height: var(--gui-size-margin);
 }
 
 ::-webkit-scrollbar-track {

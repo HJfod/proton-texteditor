@@ -109,6 +109,10 @@ if (url.searchParams.get('md') === '1'){
 	$('#check_markdown').attr('checked',true);
 }
 
+if (url.searchParams.get('tbx') === 'true'){
+	$('#check_toolbox').attr('checked',true);
+}
+
 let f = url.searchParams.get('fonts').split(',');
 for (let i = 0; i < f.length-1; i++){
 	add_font(f[i]);
@@ -123,6 +127,10 @@ if (url.searchParams.get('winb') === '0'){
 	$('#check_winborder').attr('checked',false);
 	toggle_winborder();
 }
+
+$('#check_toolbox').change( () => {
+	ipc.send('app','toggle-toolbox');
+});
 
 $('#check_markdown').change( () => {
 	ipc.send('app','toggle-markdown');

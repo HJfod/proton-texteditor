@@ -20,7 +20,7 @@
 	</span>
 	
 	<span data-tool='Open a file'>
-		<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
+		<button class='home_button' onclick='open_project();'>Open file</button>
 	</span>
 	
 	<span data-tool='Save current file as plain text'>
@@ -40,10 +40,10 @@
 <div id='titlebar' class='panel titlebar'>
 	
 	<span data-tool='Home'>
-		<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\$("#project_loader").click();' onclick='toggle_home();'>&#9750;</button>
+		<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\open_project();' onclick='toggle_home();'>&#9750;</button>
 	</span>
 	
-	<text id='title' class='title'>Proton</text> <!--<img src='resources/pic.png' width=12></img>&nbsp;-->
+	<text id='title' class='title'>Proton<text id='status' class='title status'></text></text> <!--<img src='resources/pic.png' width=12></img>&nbsp;-->
 	
 	<span data-tool='Close app'>
 		<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
@@ -123,8 +123,6 @@
 
 <div id='toolbox' class='menu_window toolbox'></div>
 
-<input type='file' size='40' id='project_loader' class='hidden'></input>
-
 <script src='scripts/init.js'></script>
 <script src='scripts/theme.js'></script>
 <script src='scripts/gui.js'></script>
@@ -132,5 +130,6 @@
 <script src='scripts/text.js'></script>
 <script src='scripts/file.js'></script>
 <script src='scripts/finish.js'></script>
+<script src='scripts/close.js'></script>
 </body>
 </html>

@@ -40,8 +40,7 @@ function toggle_markdown() {
 }
 
 function open_settings() {
-	console.log(colors);
-	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size,'','width=400,height=400');
+	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&tbx=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size,'','width=400,height=400');
 }
 
 ipc.on('app', (event, arg) => {
@@ -59,6 +58,9 @@ ipc.on('app', (event, arg) => {
 			break;
 		case 'toggle-markdown':
 			toggle_markdown();
+			break;
+		case 'toggle-toolbox':
+			$('#toolbox').is(':hidden') ? $('#toolbox').show() : $('#toolbox').hide();
 			break;
 		case 'change-font':
 			html.style.setProperty('--gui-text-font',a[1]);
@@ -82,8 +84,32 @@ ipc.on('app', (event, arg) => {
 		case 'max-tabs':
 			max_tabs = a[1];
 			break;
+		case 'file':
+			$('#status').text('• ' + a[1]).css('color','#0f0').fadeIn(0).fadeOut(status_fadeout);
+			documents[current].changed = false;
+			break;
+		case 'close-force':
+			close_force = true;
+			window.close();
+			break;
 	}
 });
+
+function resize_tabs() {
+	if ($('#tabs')[0].scrollWidth > $('#tabs').innerWidth()) {
+		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-big)');
+	}else{
+		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-normal)');
+	}
+}
+
+$('#tabs').bind('DOMSubtreeModified', () => {
+	resize_tabs();
+});
+
+window.onresize = () => {
+	resize_tabs();
+};
 
 var map = {};
 $(document).mouseup( () => {
@@ -104,6 +130,12 @@ $(document).mouseup( () => {
 	}
 }).keyup((e) => {
 	delete map[e.which];
+});
+
+$('#writing_area').keyup(() => {
+	if (documents[current].contents != $('#writing_area').html()){
+		documents[current].changed = true;
+	}
 });
 
 $('[data-tool]').mouseenter( (e) => {

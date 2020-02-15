@@ -1,64 +1,31 @@
-function download(filename, text) {
-	var element = document.createElement('a');
-	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-	element.setAttribute('download', filename);
-	
-	element.style.display = 'none';
-	document.body.appendChild(element);
-	
-	element.click();
-	
-	$(element).change(() => {
-		console.log('s');
-	});
-	
-	document.body.removeChild(element);
-}
-
 function new_project() {
 	new_doc();
 }
 
 function save_project(e = 0) {
+	ipc.send('file','name=' + documents[current].name);
 	switch (e){
 		case 0:
-			download(documents[current].name, $('#writing_area').html());
+			ipc.send('file','path=' + documents[current].path);
+			ipc.send('file-save',$('#writing_area').html());
 			break;
 		case 1:
 			let doc = $('#writing_area').html();
 			let div = document.createElement('div');
-			let d = $(div).html(doc.replace(/<div>/g,'\n').replace(/<br>/g,'\n')).text();
+			let d = $(div).html(doc.replace(/<div>/g,'\n').replace(/<br>/g,'')).text();
 			$(div).remove();
-			download(documents[current].name, d);
+			ipc.send('file-save-as',d);
 			break;
 		case 2:
-			download(documents[current].name, $('#writing_area').html());
+			ipc.send('file-save-as',$('#writing_area').html());
 			break;
 	}
 }
 
-$('#project_loader').change( () => {
-	load_project();
-});
-
-function load_project() {
-	if ($('#project_loader').val() === ''){
-		return;
-	}
-	
-	let reader = new FileReader();
-	let fi = document.getElementById('project_loader');
-	
-	for (let i = 0; i < fi.files.length; i++){
-		let file = fi.files[i];
-		let textType = /text.*/;
-		
-		reader.readAsText(file);
-		reader.onload = function(e) {
-			new_doc(file.name,reader.result,file.path);
-		}
-	}
-	
-	fi.value = null;
-	return;
+function open_project() {
+	ipc.send('file','open');
 }
+
+ipc.on('file-open', (event, obj) => {
+	new_doc(obj.path.split('\\').pop(), obj.text, obj.path);
+});

@@ -22,7 +22,10 @@ function new_doc(nam = 'Unnamed.txt', txt = '', pth = ''){
 	}
 	let n_t = document.createElement('button');
 	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).attr('data-menu',String.raw`Rename\\rename_doc(`+t_c+String.raw`)//Close\\close_doc(`+t_c+`)`+String.raw`//Details\\info_doc(`+t_c+`)`).insertBefore($('#tabnew'));
-	documents[t_c] = { name: nam, contents: txt, path: pth };
+	documents[t_c] = { name: nam, contents: txt, path: pth, changed: false };
+	if (t_c == 0 && txt != ''){
+		$('#writing_area').html(txt.replace(/(?:\r\n|\r|\n)/g,'<br>'));
+	}
 	switch_doc(t_c);
 }
 
@@ -68,7 +71,24 @@ function info_doc(which){
 }
 
 function close_doc(which) {
-	documents[which] = { name: '', contents: '', path: '' }
+	if (documents[which].changed){
+		ipc.send('app','confirm=Your changes have not been saved! Are you sure you want to close?='+which);
+	}else{
+		actually_close_doc(which);
+	}
+}
+
+ipc.on('tabs',(event,arg) => {
+	let a = arg.split('=');
+	switch (a[0]) {
+		case 'close':
+			actually_close_doc(a[1]);
+			break;
+	}
+});
+
+function actually_close_doc(which) {
+	documents[which] = { name: '', contents: '', path: '', changed: false }
 	$('#tabs').children().each((i,obj) => {
 		if ($(obj).attr('id') === 'tab'+which){
 			$(obj).remove();
