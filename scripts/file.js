@@ -27,7 +27,7 @@ function save_project(e = 0) {
 		case 1:
 			let doc = $('#writing_area').html();
 			let div = document.createElement('div');
-			let d = $(div).html(doc.replace(/<div>/g,'\n')).text();
+			let d = $(div).html(doc.replace(/<div>/g,'\n').replace(/<br>/g,'\n')).text();
 			$(div).remove();
 			download(documents[current].name, d);
 			break;

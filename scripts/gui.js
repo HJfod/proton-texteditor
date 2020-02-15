@@ -106,6 +106,13 @@ $(document).mouseup( () => {
 	delete map[e.which];
 });
 
+$('[data-tool]').mouseenter( (e) => {
+	e.preventDefault();
+	toolbox_timeout = setTimeout(() => {
+		$('#toolbox').css('left',mouse_x + 'px').css('top',mouse_y + 'px').text($(e.target).attr('data-tool')).show();
+	},1000);
+});
+
 $('[data-menu]').contextmenu( (e) => {
 	e.preventDefault();
 	let m = $('#menu_window');

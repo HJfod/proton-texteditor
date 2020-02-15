@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset='UTF-8'/>
+<title>Proton</title>
 <link rel='stylesheet' href='scripts/main.css'/>
 </head>
 <body>
@@ -10,25 +11,25 @@
 
 <div id='home' class='panel home'>
 	
-	<span title='Create new file' class='help_menu'>
+	<span data-tool='Create new file'>
 		<button class='home_button' onclick='new_project();'>New file</button>
 	</span>
 	
-	<span title='Save current file' class='help_menu'>
+	<span data-tool='Save current file'>
 		<button class='home_button' onclick='save_project(0);'>Save file</button>	<!--<span class='menu_arrow'>&nbsp;»</span>-->
 	</span>
 	
-	<span title='Open a file' class='help_menu'>
+	<span data-tool='Open a file'>
 		<button class='home_button' onclick='$("#project_loader").click();'>Open file</button>
 	</span>
 	
-	<span title='Save current file as plain text' class='help_menu'>
+	<span data-tool='Save current file as plain text'>
 		<button class='home_button' onclick='save_project(1);'>Export file</button>
 	</span>
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
-		<span title='Settings' class='help_menu'>
+		<span data-tool='Settings'>
 			<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
 		</span>
 		
@@ -38,21 +39,21 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<span title='Home' class='help_menu'>
+	<span data-tool='Home'>
 		<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\$("#project_loader").click();' onclick='toggle_home();'>&#9750;</button>
 	</span>
 	
-	<text id='title' class='title'>DarkPad</text>
+	<text id='title' class='title'>Proton</text>
 	
-	<span title='Close app' class='help_menu'>
+	<span data-tool='Close app'>
 		<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
 	</span>
 	
-	<span title='Fullscreen' class='help_menu'>
+	<span data-tool='Fullscreen'>
 		<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
 	</span>
 	
-	<span title='Minimize' class='help_menu'>
+	<span data-tool='Minimize'>
 		<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
 	</span>
 	
@@ -60,35 +61,39 @@
 
 <div id='markdown' class='panel markdown'>
 	
-	<span title='Bold (Ctrl + B)' class='help_menu'>
+	<span data-tool='Bold (Ctrl + B)'>
 		<button class='markbutton' onclick='colourText(1)'><b>B</b></button>
 	</span>
 	
-	<span title='Italics (Ctrl + I)' class='help_menu'>
+	<span data-tool='Italics (Ctrl + I)'>
 		<button class='markbutton' onclick='colourText(2)'><i>i</i></button> <!--𝐁𝑖U̲-->
 	</span>
 	
-	<span title='Underline (Ctrl + U)' class='help_menu'>
+	<span data-tool='Underline (Ctrl + U)'>
 		<button class='markbutton' onclick='colourText(3)'><u>U</u></button>
 	</span>
 	
-	<span title='Strikethrough' class='help_menu'>
+	<span data-tool='Strikethrough'>
 		<button class='markbutton' onclick='colourText(6)'><s>abc</s></button>
 	</span>
 	
-	<span title='Color text' class='help_menu'>
+	<span data-tool='Color text'>
 		<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
 	</span>
 	
-	<span title='Superscript' class='help_menu'>
+	<span data-tool='Superscript'>
 		<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
 	</span>
 	
-	<span title='Subscript' class='help_menu'>
+	<span data-tool='Subscript'>
 		<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
 	</span>
 	
-	<span title='Add special characters' class='help_menu'>
+	<span data-tool='Change text size'>
+		<button class='markbutton' onclick='colourText(7)'>&#128474;</button>
+	</span>
+	
+	<span data-tool='Add special characters'>
 		<button class='markbutton' onclick='selectUnicode()'>文</button>
 	</span>
 	
@@ -111,6 +116,8 @@
 <div id='menu_window' class='menu_window'></div>
 
 <div id='menu_select' class='menu_window'></div>
+
+<div id='toolbox' class='menu_window toolbox'></div>
 
 <input type='file' size='40' id='project_loader' class='hidden'></input>
 

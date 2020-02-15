@@ -62,8 +62,9 @@ function add_color(t) {
 	$('#color_select_c').hide();
 	let n_o = document.createElement('button');
 	$(n_o).attr('class','selector color');
+	$(n_o).attr('id','clr'+t.replace(/#/g,''));
 	$(n_o).text('\u25a0');
-	$(n_o).attr('data-menu',String.raw`Delete\\delete_color("` + t + `")`);
+	$(n_o).attr('data-menu',String.raw`Delete\\delete_color("` + t.replace(/#/g,'') + `")`);
 	$(n_o).css('color',t);
 	$(n_o).insertBefore($('#c_cu'));
 }
@@ -90,7 +91,7 @@ function delete_font(t) {
 
 function delete_color(t) {
 	$('.selector.color').each((i,obj) => {
-		if ($(obj).css('color') == t){
+		if ($(obj).attr('id') == 'clr' + t){
 			$(obj).remove();
 		}
 	});

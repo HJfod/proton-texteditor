@@ -1,7 +1,7 @@
 function colourText(how = 0) {
+	let m = $('#menu_select');
 	switch (how){
 		case 0:
-			let m = $('#menu_select');
 			m.empty();
 			let c = colors.toString().replace(/%23/g,'#').split(';');
 			c.splice(0,0,'var(--gui-color-text-default)');
@@ -42,6 +42,24 @@ function colourText(how = 0) {
 		case 6:
 			document.execCommand('strikeThrough');
 			break;
+		case 7:
+			m.empty();
+			let f = ['Normal','Big','Large','Huge','Small','Tiny'];
+			for (let i = 0; i < f.length; i++){
+				let n_o = document.createElement('button');
+				n_o.innerHTML = f[i];
+				n_o.setAttribute('class','menu_option wide');
+				n_o.setAttribute('onmouseup','changeFontSize("' + f[i] + '"); $("#menu_select").hide().empty()');
+				m.append(n_o);
+			}
+			if ($('#menu_window').is(':hidden')){
+				t = $('#textarea').css('top');
+			}else{
+				t = mouse_y;
+			}
+			m.css('left',mouse_x).css('top',$('#textarea').css('top'));
+			m.show();
+			break;
 	}
 }
 
@@ -78,4 +96,10 @@ function selectUnicode() {
 	}
 	m.css('left',mouse_x).css('top',$('#textarea').css('top'));
 	m.show();
+}
+
+function changeFontSize(sz) {
+	let selection = window.getSelection().toString();
+	let wrappedselection = '<span class="ts_' + sz + '">' + selection + '</span>';
+	document.execCommand('insertHTML', false, wrappedselection);
 }
