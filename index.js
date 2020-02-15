@@ -8,7 +8,7 @@ let file_path;
 app.on('ready', () => {
 	const ipc = require('electron').ipcMain;
 	
-	window_main = new BrowserWindow({ frame: false, webPreferences: { nodeIntegration: true } });
+	window_main = new BrowserWindow({ icon: 'resources/pic.png', frame: false, webPreferences: { nodeIntegration: true } });
 	
 	window_main.loadFile('main.html');
 	
