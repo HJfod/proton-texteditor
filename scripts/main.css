@@ -109,6 +109,13 @@ body {
 	font-size: calc( var(--gui-size-markdown) / 2 );
 }
 
+.markbutton.wide {
+	width: calc( var(--gui-size-markdown) * 1.3 );
+}
+.markbutton.chonk {
+	width: calc( var(--gui-size-markdown) * 1.6 );
+}
+
 .markbutton:hover {
 	background-color: var(--gui-color-button-hover);
 }
@@ -230,10 +237,12 @@ body {
 }
 
 .menu_window.toolbox {
-	height: var(--gui-size-button-text);
+	opacity: 0;
+	padding: calc( var(--gui-size-button-text) / 2 );
 	font-size: var(--gui-size-button-text);
 	font-family: var(--gui-button-font);
 	color: var(--gui-color-button-text);
+	pointer-events: none;
 }
 
 .menu_window.unicode {

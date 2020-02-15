@@ -108,9 +108,23 @@ $(document).mouseup( () => {
 
 $('[data-tool]').mouseenter( (e) => {
 	e.preventDefault();
+	let ta = $(e.target);
+	
+	let i = 0;
+	while (ta.attr('data-tool') == undefined){
+		if (i < 50){
+			i++;
+		}else{
+			return false;
+		}
+		ta = ta.parent();
+	}
+	
 	toolbox_timeout = setTimeout(() => {
-		$('#toolbox').css('left',mouse_x + 'px').css('top',mouse_y + 'px').text($(e.target).attr('data-tool')).show();
+		$('#toolbox').css('left',mouse_x + 'px').css('top',(mouse_y + 15) + 'px').text(ta.attr('data-tool')).css('opacity','1');
 	},1000);
+}).mouseleave( (e) => {
+	clearTimeout(toolbox_timeout);
 });
 
 $('[data-menu]').contextmenu( (e) => {

@@ -23,10 +23,8 @@ let url = new URL(window.location.href);
 $(document).mousemove( (e) => {
 	mouse_x = e.pageX;
 	mouse_y = e.pageY;
-	clearTimeout(toolbox_timeout);
-	$('#toolbox').hide();
+	$('#toolbox').css('opacity','0');
 });
 
 $('#menu_window').hide();
 $('#menu_select').hide();
-$('#toolbox').hide();

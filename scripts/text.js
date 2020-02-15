@@ -60,6 +60,9 @@ function colourText(how = 0) {
 			m.css('left',mouse_x).css('top',$('#textarea').css('top'));
 			m.show();
 			break;
+		case 8:
+			document.execCommand('removeFormat');
+			break;
 	}
 }
 
