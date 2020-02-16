@@ -1,5 +1,6 @@
 const { BrowserWindow, app, dialog, Menu } = require('electron');
 const fs = require('fs');
+const path = require('path');
 
 let window_main;
 let file_name;
@@ -10,7 +11,7 @@ process.env.NODE_ENV = 'production';
 app.on('ready', () => {
 	const ipc = require('electron').ipcMain;
 	
-	window_main = new BrowserWindow({ icon: 'resources/pic.png', frame: false, webPreferences: { nodeIntegration: true, zoomFactor: 1.0 } });
+	window_main = new BrowserWindow({ icon: 'resources/icon.png', frame: false, webPreferences: { nodeIntegration: true, zoomFactor: 1.0 } });
 	
 	window_main.loadFile('main.html');
 	
@@ -50,12 +51,26 @@ app.on('ready', () => {
 						fs.readFile(o.filePaths[0], (err, data) => {
 							if (err) throw err;
 							console.log('Opening file ' + o.filePaths[0]);
-							let n_o = {
-								path: o.filePaths[0],
-								text: data.toString()
-							};
-							window_main.webContents.send('file-open',n_o);
-							window_main.webContents.send('app','file=Succesfully opened!');
+							if (path.extname(o.filePaths[0]) == '.html'){
+								let c = dialog.showMessageBox({ type: 'warning', buttons: ['Yes','Cancel'], title: 'Confirm action', message: 'Opening .html files will likely end up with the file not loading properly and may damage the app! Are you sure you want to do this?' });
+								c.then((e) => {
+									if (e.response == 0){
+										let n_o = {
+											path: o.filePaths[0],
+											text: data.toString()
+										};
+										window_main.webContents.send('file-open',n_o);
+										window_main.webContents.send('app','file=Succesfully opened!');
+									}
+								});
+							}else{
+								let n_o = {
+									path: o.filePaths[0],
+									text: data.toString()
+								};
+								window_main.webContents.send('file-open',n_o);
+								window_main.webContents.send('app','file=Succesfully opened!');
+							}
 						});
 					}else{
 						console.log('File open cancelled');
