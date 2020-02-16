@@ -22,10 +22,13 @@ function save_project(e = 0) {
 	}
 }
 
-function open_project() {
-	ipc.send('file','open');
+function open_project(w = '') {
+	ipc.send('file','open=' + w);
 }
 
 ipc.on('file-open', (event, obj) => {
 	new_doc(obj.path.split('\\').pop(), obj.text, obj.path);
+	if (!obj.recent){
+		add_recent_doc(obj.path);
+	}
 });

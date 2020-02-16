@@ -54,15 +54,15 @@ try {
 				fs.accessSync(file[1]);
 				new_doc(file[0],fs.readFileSync(file[1]).toString(),file[1]);
 			} catch (err) {
-				$('#status').text('• File ' + file[0] + ' failed to load!').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
+				show_status('File ' + file[0] + ' failed to load!',1);
 				console.error(err);
 			};
 		}
 	}else{
-		$('#status').text('• There was an error loading user data').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
+		show_status('There was an error loading user data',1);
 	}
 } catch (err) {
-	$('#status').text('• User data could not be found!').css('color','#f00').fadeIn(0).fadeOut(status_fadeout);
+	show_status('User data could not be found!',1);
 	console.error(err);
 };
 

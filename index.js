@@ -5,6 +5,8 @@ const path = require('path');
 let window_main;
 let file_name;
 let file_path;
+let logs = '';
+let logwind;
 
 process.env.NODE_ENV = 'production';
 
@@ -36,6 +38,21 @@ app.on('ready', () => {
 					}
 				});
 				break;
+			case 'open-logs':
+				logwind = new BrowserWindow({ icon: 'resources/icon.png', frame: false, webPreferences: { nodeIntegration: true, zoomFactor: 1.0 } });
+				logwind.loadFile('logs.html');
+				logwind.on('closed', () => {
+					console.log('yess');
+					logwind = null;
+				});
+				break;
+			case 'get-logs':
+				logwind.webContents.send('logs',logs);
+				break;
+			case 'new-log':
+				let d = new Date();
+				logs += d.toString() + ': ' + a[1] + '<br>';
+				break;
 			default:
 				window_main.webContents.send('app',arg);
 		}
@@ -45,37 +62,37 @@ app.on('ready', () => {
 		let a = arg.split('=');
 		switch (a[0]) {
 			case 'open':
-				let s = dialog.showOpenDialog({});
-				s.then((o) => {
-					if (!o.canceled){
-						fs.readFile(o.filePaths[0], (err, data) => {
-							if (err) throw err;
-							console.log('Opening file ' + o.filePaths[0]);
-							if (path.extname(o.filePaths[0]) == '.html'){
-								let c = dialog.showMessageBox({ type: 'warning', buttons: ['Yes','Cancel'], title: 'Confirm action', message: 'Opening .html files will likely end up with the file not loading properly and may damage the app! Are you sure you want to do this?' });
-								c.then((e) => {
-									if (e.response == 0){
-										let n_o = {
-											path: o.filePaths[0],
-											text: data.toString()
-										};
-										window_main.webContents.send('file-open',n_o);
-										window_main.webContents.send('app','file=Succesfully opened!');
-									}
-								});
-							}else{
-								let n_o = {
-									path: o.filePaths[0],
-									text: data.toString()
-								};
-								window_main.webContents.send('file-open',n_o);
-								window_main.webContents.send('app','file=Succesfully opened!');
-							}
-						});
-					}else{
-						console.log('File open cancelled');
-					}
-				});
+				if (a[1] === ''){
+					let s = dialog.showOpenDialog({});
+					s.then((o) => {
+						if (!o.canceled){
+							fs.readFile(o.filePaths[0], (err, data) => {
+								if (err) throw err;
+								console.log('Opening file ' + o.filePaths[0]);
+								if (path.extname(o.filePaths[0]) == '.html'){
+									let c = dialog.showMessageBox({ type: 'warning', buttons: ['Yes','Cancel'], title: 'Confirm action', message: 'Opening .html files will likely end up with the file not loading properly and may damage the app! Are you sure you want to do this?' });
+									c.then((e) => {
+										if (e.response == 0){
+											openFile(o.filePaths[0],data.toString(),false);
+										}
+									});
+								}else{
+									openFile(o.filePaths[0],data.toString(),false);
+								}
+							});
+						}else{
+							console.log('File open cancelled');
+						}
+					});
+				}else{
+					let aa = a[1].replace(/bSlashChar/g,'\\');
+					console.log(aa);
+					fs.readFile(aa, (err, data) => {
+						if (err) throw err;
+						console.log('Opening file ' + aa);
+						openFile(aa,data.toString(),true);
+					});
+				}
 				break;
 			case 'name':
 				file_name = a[1];
@@ -132,12 +149,22 @@ function saveFile(arg) {
 			fs.writeFile(o.filePath, arg, (err) => {
 				if (err) throw err;
 				console.log('The file has been saved at ' + o.filePath);
-				window_main.webContents.send('app','file=Succesfully saved!');
+				window_main.webContents.send('app','file=Succesfully saved at ' + o.filePath + '!');
 			});
 		}else{
 			console.log('File save cancelled!');
 		}
 	});
+}
+
+function openFile(p,t,r){
+	let n_o = {
+		path: p,
+		text: t,
+		recent: r
+	};
+	window_main.webContents.send('file-open',n_o);
+	window_main.webContents.send('app','file=Succesfully opened ' + p + ' !');
 }
 
 const mainMenuTemplate = [

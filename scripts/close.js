@@ -1,6 +1,10 @@
 window.onbeforeunload = (e) => {
 	let data = 'theme_current=' + theme_current + '&markdown=' + $('#markdown').css('opacity') + '&toolbox=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size;
 	
+	let recentdata = '';
+	
+	
+	
 	let docdata = '';
 	for (let i = 0; i < documents.length; i++){
 		if (documents[i].path == ''){

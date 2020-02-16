@@ -573,3 +573,19 @@ body {
 	font-size: calc( var(--gui-size-text) * 0.5 );
 	transition-duration: var(--gui-transition-time-long);
 }
+
+.recent_file {
+	width: 100%;
+	border: none;
+	background-color: rgba(0,0,0,0);
+	color: var(--gui-color-button-hover);
+	font-family: var(--gui-button-font);
+	font-size: var(--gui-size-button-text);
+	padding: var(--gui-size-margin);
+	outline: none;
+	transition-duration: var(--gui-transition-time);
+}
+
+.recent_file:hover {
+	background-color: var(--gui-color-button-hover);
+}

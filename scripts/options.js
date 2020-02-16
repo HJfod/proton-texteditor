@@ -3,6 +3,10 @@ $('#o_tab0').show();
 $('#font_select_c').hide();
 $('#color_select_c').hide();
 
+function open_logs() {
+	ipc.send('app','open-logs');
+}
+
 function options_close() {
 	let t = '';
 	let c = '';

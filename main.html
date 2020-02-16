@@ -11,27 +11,19 @@
 
 <div id='home' class='panel home'>
 	
-	<span data-tool='Create new file (Ctrl + N)'>
-		<button class='home_button' onclick='new_project();'>New file</button>
-	</span>
+	<button class='home_button' onclick='new_project();' data-tool='Create new file (Ctrl + N)'>New file</button>
 	
-	<span data-tool='Save current file (Ctrl + S)'>
-		<button class='home_button' onclick='save_project(0);'>Save file</button>	<!--<span class='menu_arrow'>&nbsp;»</span>-->
-	</span>
+	<button class='home_button' onclick='save_project(0);' data-tool='Save current file (Ctrl + S)'>Save file</button>
 	
-	<span data-tool='Open a file (Ctrl + O)'>
-		<button class='home_button' onclick='open_project();'>Open file</button>
-	</span>
+	<button class='home_button' onclick='open_project();' data-tool='Open a file (Ctrl + O)'>Open file</button>
 	
-	<span data-tool='Save current file as plain text (Ctrl + E)'>
-		<button class='home_button' onclick='save_project(1);'>Export file</button>
-	</span>
+	<button class='home_button' onclick='save_project(1);' data-tool='Save current file as plain text (Ctrl + E)'>Export file</button>
+	
+	<div id='recent_files' data-tool='Recent files'></div>
 	
 	<div style='bottom: 0px; width: 100%; position: absolute;'>
 		
-		<span data-tool='Settings (F1)'>
-			<button class='home_button' onclick='open_settings();'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
-		</span>
+		<button class='home_button' onclick='open_settings();' data-tool='Settings (F1)'><img class='home_gog' src='resources/gog.png'></img>Settings</button>
 		
 	</div>
 	
@@ -39,67 +31,39 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<span data-tool='Home'>
-		<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\open_project();' onclick='toggle_home();'>&#9750;</button>
-	</span>
+	<button id='button_home' class='button home' data-menu='New file\\new_project();//Save file\\save_project();//Save as\\save_project(2);//Open file\\open_project();' onclick='toggle_home();' data-tool='Home'>&#9750;</button>
 	
 	<text id='title' class='title'>Proton<text id='status' class='title status'></text></text> <!--<img src='resources/pic.png' width=12></img>&nbsp;-->
 	
-	<span data-tool='Close app (Alt + F4)'>
-		<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
-	</span>
+	<button id='button_close' class='button close' onclick='window.close();' data-tool='Close app (Alt + F4)'>&#10005;</button>
 	
-	<span data-tool='Fullscreen (F11)'>
-		<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
-	</span>
+	<button id='button_fs' class='button fs' onclick='rs_window(0)' data-tool='Fullscreen (F11)'>&#9744;</button>
 	
-	<span data-tool='Minimize (Ctrl + M)'>
-		<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
-	</span>
+	<button id='button_min' class='button min' onclick='rs_window(1);' data-tool='Minimize (Ctrl + M)'>&#9472;</button>
 	
 </div>
 
 <div id='markdown' class='panel markdown'>
 	
-	<span data-tool='Bold (Ctrl + B)'>
-		<button class='markbutton' onclick='colourText(1)'><b>B</b></button>
-	</span>
+	<button class='markbutton' onclick='colourText(1)' data-tool='Bold (Ctrl + B)'><b>B</b></button>
 	
-	<span data-tool='Italics (Ctrl + I)'>
-		<button class='markbutton' onclick='colourText(2)'><i>i</i></button> <!--𝐁𝑖U̲-->
-	</span>
+	<button class='markbutton' onclick='colourText(2)' data-tool='Italics (Ctrl + I)'><i>i</i></button> <!--𝐁𝑖U̲-->
 	
-	<span data-tool='Underline (Ctrl + U)'>
-		<button class='markbutton' onclick='colourText(3)'><u>U</u></button>
-	</span>
+	<button class='markbutton' onclick='colourText(3)' data-tool='Underline (Ctrl + U)'><u>U</u></button>
 	
-	<span data-tool='Strikethrough'>
-		<button class='markbutton wide' onclick='colourText(6)'><s>abc</s></button>
-	</span>
+	<button class='markbutton wide' onclick='colourText(6)' data-tool='Strikethrough'><s>abc</s></button>
 	
-	<span data-tool='Color text'>
-		<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)'>C</button>
-	</span>
+	<button class='markbutton' id='colorer' onclick='$("#menu_window").css("left",mouse_x); colourText(0)' data-tool='Color text'>C</button>
 	
-	<span data-tool='Superscript (Ctrl + ^)'>
-		<button class='markbutton' onclick='colourText(4)'>x<sup>a</sup></button>
-	</span>
+	<button class='markbutton' onclick='colourText(4)' data-tool='Superscript (Ctrl + ^)'>x<sup>a</sup></button>
 	
-	<span data-tool='Subscript (Ctrl + _)'>
-		<button class='markbutton' onclick='colourText(5)'>x<sub>a</sub></button>
-	</span>
+	<button class='markbutton' onclick='colourText(5)' data-tool='Subscript (Ctrl + _)'>x<sub>a</sub></button>
 	
-	<span data-tool='Change text size'>
-		<button class='markbutton' onclick='colourText(7)'>&#128474;</button>
-	</span>
+	<button class='markbutton' onclick='colourText(7)' data-tool='Change text size'>&#128474;</button>
 	
-	<span data-tool='Clear all markdown'>
-		<button class='markbutton chonk' onclick='colourText(8)'>clear</button>
-	</span>
+	<button class='markbutton chonk' onclick='colourText(8)' data-tool='Clear all markdown'>clear</button>
 	
-	<span data-tool='Add special characters'>
-		<button class='markbutton' onclick='selectUnicode()'>文</button>
-	</span>
+	<button class='markbutton' onclick='selectUnicode()' data-tool='Add special characters'>文</button>
 	
 </div>
 
@@ -107,7 +71,7 @@
 	
 	<div class='tabs_border'></div>
 	
-	<button onclick='new_doc()' class='tab add' id='tabnew'>+</button>
+	<button onclick='new_doc()' class='tab add' id='tabnew' data-tool='New file (Ctrl + N)'>+</button>
 	
 </div>
 

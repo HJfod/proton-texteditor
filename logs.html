@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Logs</title>
+<meta charset='UTF-8'/>
+<link rel='stylesheet' href='scripts/main.css'/>
+</head>
+<body>
+
+<div id='option_border' class='option_border'></div>
+
+<div id='titlebar' class='panel titlebar'>
+	
+	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Logs</text>
+	
+	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
+	<!--
+	<button id='button_fs' class='button fs' onclick='rs_window(0)'>&#9744;</button>
+	
+	<button id='button_min' class='button min' onclick='rs_window(1);'>&#9472;</button>
+	-->
+</div>
+
+<div class='option_tab' style='top: var(--gui-size-titlebar); height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-margin) ) )'>
+	
+	<textarea style='width: calc( 100% - var(--gui-size-margin) ); height: calc( 100% - ( var(--gui-size-margin) * 8 ) ); resize: none; color: #0f0; background-color: #111; outline: none; border: none;' id='logtext'></textarea>
+	
+	<div id='tabs'></div>
+	
+</div>
+
+<div id='menu_window' class='menu_window'></div>
+
+<div id='menu_select' class='menu_window'></div>
+
+<script src='scripts/init.js'></script>
+<script src='scripts/theme.js'></script>
+<script src='scripts/gui.js'></script>
+<script src='scripts/logs.js'></script>
+</body>
+</html>

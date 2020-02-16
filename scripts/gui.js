@@ -21,6 +21,12 @@ function toggle_home() {
 	}
 }
 
+function show_status(t,type) {
+	type ? type = '#f00' : type = '#0f0';
+	$('#status').text('• ' + t).css('color',type).fadeIn(0).fadeOut(status_fadeout);
+	ipc.send('app','new-log=' + t);
+}
+
 function toggle_winborder() {
 	if ($('#option_border').css('opacity') === '1'){
 		$('#option_border').css('opacity',0);
@@ -85,7 +91,7 @@ ipc.on('app', (event, arg) => {
 			max_tabs = a[1];
 			break;
 		case 'file':
-			$('#status').text('• ' + a[1]).css('color','#0f0').fadeIn(0).fadeOut(status_fadeout);
+			show_status(a[1],0);
 			documents[current].changed = false;
 			break;
 		case 'close-force':
@@ -146,6 +152,17 @@ $(document).mouseup( () => {
 		case key.f1.toString():
 			open_settings();
 			break;
+		case key.ctrl + ',' + key.w:
+			close_doc(current);
+			break;
+		case key.ctrl + ',' + key.left:
+			move_doc(current,-1);
+			th = false;
+			break;
+		case key.ctrl + ',' + key.right:
+			move_doc(current,1);
+			th = false;
+			break;
 		default:
 			th = false;
 	}
@@ -162,25 +179,8 @@ $('#writing_area').keyup(() => {
 	}
 });
 
-$('[data-tool]').mouseenter( (e) => {
-	e.preventDefault();
-	let ta = $(e.target);
-	
-	let i = 0;
-	while (ta.attr('data-tool') == undefined){
-		if (i < 50){
-			i++;
-		}else{
-			return false;
-		}
-		ta = ta.parent();
-	}
-	
-	toolbox_timeout = setTimeout(() => {
-		$('#toolbox').css('left',mouse_x + 'px').css('top',(mouse_y + 15) + 'px').text(ta.attr('data-tool')).css('opacity','1');
-	},1000);
-}).mouseleave( (e) => {
-	clearTimeout(toolbox_timeout);
+$('[data-tool]').mouseenter((e) => {
+	hovered_over = e.target;
 });
 
 $('[data-menu]').contextmenu( (e) => {
