@@ -11,7 +11,7 @@ try {
 		savedata = savedata.split('\n');
 		
 		let sett = savedata[0].split('&');
-		for (let i = 0; i < sett.length; i++){
+		for (let i in sett){
 			let s = sett[i].split('=');
 			
 			switch(s[0]){
@@ -47,8 +47,14 @@ try {
 					break;
 			}
 		}
-
-		for (let i = 1; i < savedata.length; i++){
+		
+		let n = Number(savedata[1]);
+		
+		for (let i = 2; i < 2 + n; i++){
+			add_recent_doc(savedata[i]);
+		}
+		
+		for (let i = n + 2; i < savedata.length; i++){
 			let file = savedata[i].split(';docSeparator;');
 			try {
 				fs.accessSync(file[1]);

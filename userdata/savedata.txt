@@ -1,1 +1,0 @@
-theme_current=light&markdown=0&toolbox=true&fonts=&colors=rgb(255, 0, 0);rgb(0, 255, 0);rgb(0, 0, 255);rgb(0, 255, 255)&winb=1&mtabs=40&size=16
