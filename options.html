@@ -47,6 +47,16 @@
 		<span class='checkbox_checkmark'></span>
 	</label>
 	
+	<label class='checkbox_container'>
+		<input type='checkbox' id='check_remember' checked>Remember session</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
+	
+	<label class='checkbox_container'>
+		<input type='checkbox' id='check_savelocation' checked>Save files in user projects folder</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
+	
 	<br><text>Tab limit</text><br>
 	
 	<input class='selector' id='tab_size_input' maxlength=2 size=1 value=5></input>
@@ -89,12 +99,7 @@
 	
 	<text>Theme</text><br>
 	<div class='select'>
-		<button class='selector' onclick='option_switch_theme("midnight")'>Midnight</button>
-		<button class='selector' onclick='option_switch_theme("ruska")'>Ruska</button>
-		<button class='selector' onclick='option_switch_theme("ocean")'>Deeb Sea</button>
-		<button class='selector' onclick='option_switch_theme("light")'>Light</button>
-		<button class='selector' onclick='option_switch_theme("spring")'>Spring</button>
-		<button class='selector' onclick='option_switch_theme("custom")'>Custom</button>
+		<button class='selector' onclick='option_switch_theme(true)' id='theme_help'>?</button>
 	</div>
 	
 	<br><br>
@@ -108,7 +113,7 @@
 
 <div id='o_tab3' class='option_tab'>
 	
-	<img width=20 src='resources/icon.png'></img>&nbsp;&nbsp;<text style='font-size: calc(var(--gui-size-button-text) * 1.5)'>Proton v1.2</text>
+	<img width=20 src='resources/icon.png'></img>&nbsp;&nbsp;<text style='font-size: calc(var(--gui-size-button-text) * 1.5)'>Proton v1.3</text>
 	
 	<br><br>
 	

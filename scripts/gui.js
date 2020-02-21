@@ -46,7 +46,20 @@ function toggle_markdown() {
 }
 
 function open_settings() {
-	window.open('options.html?theme=' + theme_current + '&md=' + $('#markdown').css('opacity') + '&tbx=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size,'','width=400,height=400');
+	const data = {
+		theme: theme_current,
+		md: $('#markdown').css('opacity'),
+		tbx: $('#toolbox').is(':visible'),
+		fonts: fonts,
+		colors: colors,
+		winb: $('#option_border').css('opacity'),
+		mtabs: max_tabs,
+		size: font_size,
+		save_session: remember_session,
+		save_in_projects: use_default_save_location
+	}
+	ipc.send('set-settings',data);
+	ipc.send('app','open-settings');
 }
 
 ipc.on('app', (event, arg) => {
@@ -92,7 +105,19 @@ ipc.on('app', (event, arg) => {
 			break;
 		case 'file':
 			show_status(a[1],0);
+			break;
+		case 'file-save':
+			show_status('File succesfully save at ' + a[1],0);
+			documents[current].name = a[1].split('\\').pop();
+			documents[current].path = a[1];
 			documents[current].changed = false;
+			rename_doc(current,a[1].split('\\').pop());
+			add_recent_doc(a[1]);
+		case 'toggle-session-save':
+			remember_session ? remember_session = 0 : remember_session = 1;
+			break;
+		case 'toggle-save-location':
+			use_default_save_location ? use_default_save_location = 0 : use_default_save_location = 1;
 			break;
 		case 'close-force':
 			close_force = true;

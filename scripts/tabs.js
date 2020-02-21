@@ -29,24 +29,28 @@ function new_doc(nam = 'Unnamed.txt', txt = '', pth = ''){
 	switch_doc(t_c);
 }
 
-function rename_doc(which) {
+function rename_doc(which,set = false) {
 	$('#tabs').children().each((i,obj) => {
 		if ($(obj).attr('id') === 'tab'+which){
-			$(obj).attr('contenteditable','true').focus();
-			document.execCommand('selectAll', false, null);
-			$(obj).keypress((e) => {
-				if (e.which === 13) {
-					$(obj).focusout();
-				}
-			});
-			$(document).click(() => {
-				$(obj).focusout()
-			});
-			$(obj).focusout(() => {
-				$(obj).attr('contenteditable','false');
-				documents[which].name = $(obj).text();
-				$('#writing_area').focus();
-			});
+			if (!set){
+				$(obj).attr('contenteditable','true').focus();
+				document.execCommand('selectAll', false, null);
+				$(obj).keypress((e) => {
+					if (e.which === 13) {
+						$(obj).focusout();
+					}
+				});
+				$(document).click(() => {
+					$(obj).focusout()
+				});
+				$(obj).focusout(() => {
+					$(obj).attr('contenteditable','false');
+					documents[which].name = $(obj).text();
+					$('#writing_area').focus();
+				});
+			}else{
+				$(obj).text(set);
+			}
 		}
 	});
 }

@@ -1,5 +1,5 @@
 window.onbeforeunload = (e) => {
-	let data = 'theme_current=' + theme_current + '&markdown=' + $('#markdown').css('opacity') + '&toolbox=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size;
+	let data = 'theme_current=' + theme_current + '&markdown=' + $('#markdown').css('opacity') + '&toolbox=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size + '&save_session=' + remember_session + '&saveloc=' + use_default_save_location;
 	
 	let recentdata = '\n' + recent.docs.length.toString();
 	
@@ -12,12 +12,14 @@ window.onbeforeunload = (e) => {
 		if (documents[i].path == ''){
 			continue;
 		}
-		docdata += '\n' + documents[i].name + ';docSeparator;' + documents[i].path;
+		docdata += '\n' + documents[i].path;
 	}
 	
-	fs.writeFile('resources/savedata.txt', data + recentdata + docdata, (err) => {
-		if (err) throw err;
-	});
+	let dir = path.join(__dirname + dLoop + '/userdata');
+	
+	fs.writeFileSync(dir + '/savedata.txt', data + recentdata + docdata);
+	
+	console.log(dir);
 	
 	let t = false;
 	for (let i in documents){

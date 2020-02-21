@@ -6,7 +6,14 @@ function save_project(e = 0) {
 	ipc.send('file','name=' + documents[current].name);
 	switch (e){
 		case 0:
-			ipc.send('file','path=' + documents[current].path);
+			let where = '';
+			if (use_default_save_location){
+				where = path.join(__dirname + '/userdata/projects/' + documents[current].name);
+				fs.writeFileSync(where,'');
+			}else{
+				where = documents[current].path;
+			}
+			ipc.send('file','path=' + where);
 			ipc.send('file-save',$('#writing_area').html());
 			break;
 		case 1:

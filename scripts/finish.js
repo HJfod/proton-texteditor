@@ -1,12 +1,13 @@
 colors = '%23f00;%230f0;%2300f;%230ff';
 
-let dir = path.join(__dirname + '/..' + '/savedata.txt');
+let dir = path.join(__dirname + dLoop + '/userdata/savedata.txt');
 console.log(dir);
+
 try {
 	fs.accessSync(dir);
 	
 	let savedata = fs.readFileSync(dir).toString();
-
+	
 	if (savedata != undefined){
 		savedata = savedata.split('\n');
 		
@@ -45,25 +46,34 @@ try {
 				case 'size':
 					font_size = s[1];
 					break;
+				case 'saveloc':
+					use_default_save_location = Number(s[1]);
+					break;
+				case 'save_session':
+					remember_session = Number(s[1]);
+					break;
 			}
 		}
 		
 		let n = Number(savedata[1]);
 		
-		for (let i = 2; i < 2 + n; i++){
-			add_recent_doc(savedata[i]);
+		if (remember_session){
+			for (let i = 2; i < 2 + n; i++){
+				add_recent_doc(savedata[i]);
+			}
+			
+			for (let i = n + 2; i < savedata.length; i++){
+				let file = savedata[i];
+				try {
+					fs.accessSync(file);
+					new_doc(file.split('\\').pop(),fs.readFileSync(file).toString(),file);
+				} catch (err) {
+					show_status('File ' + file + ' failed to load!',1);
+					console.error(err);
+				};
+			}
 		}
-		
-		for (let i = n + 2; i < savedata.length; i++){
-			let file = savedata[i].split(';docSeparator;');
-			try {
-				fs.accessSync(file[1]);
-				new_doc(file[0],fs.readFileSync(file[1]).toString(),file[1]);
-			} catch (err) {
-				show_status('File ' + file[0] + ' failed to load!',1);
-				console.error(err);
-			};
-		}
+		show_status('User data loaded succesfully!',0);
 	}else{
 		show_status('There was an error loading user data',1);
 	}

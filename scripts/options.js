@@ -38,8 +38,8 @@ function switch_tab(to){
 }
 
 function option_switch_theme(to) {
-	if (to === 'custom'){
-		window.open('theme.html?theme=' + theme_current + '&winb=' + $('#option_border').css('opacity'),'','width=350,height=350');
+	if (to === true){
+		window.open('themeinfo.html','','width=350,height=120');
 	}else{
 		ipc.send('app','change-theme=' + to);
 		switch_theme(to);
@@ -107,42 +107,58 @@ for (let i = 0; i < default_fonts.length; i++){
 
 $('.selector.font').each((i, obj) => { $(obj).css('font-family',$(obj).text()) });
 
-switch_theme(url.searchParams.get('theme').split('>'));
-
-if (url.searchParams.get('md') === '1'){
-	$('#check_markdown').attr('checked',true);
-}
-
-if (url.searchParams.get('tbx') === 'true'){
-	$('#check_toolbox').attr('checked',true);
-}
-
-let f = url.searchParams.get('fonts').split(',');
-for (let i = 0; i < f.length-1; i++){
-	add_font(f[i]);
-}
-
-let c = url.searchParams.get('colors').split(';');
-for (let i = 0; i < c.length; i++){
-	add_color(c[i]);
-}
-
-if (url.searchParams.get('winb') === '0'){
-	$('#check_winborder').attr('checked',false);
-	toggle_winborder();
-}
-
-$('#check_toolbox').change( () => {
-	ipc.send('app','toggle-toolbox');
+ipc.on('settings', (event, data) => {
+	console.log(data);
+	
+	switch_theme(data.theme);
+	
+	if (data.md === '1'){
+		$('#check_markdown').attr('checked',true);
+	}
+	if (data.tbx === true){
+		$('#check_toolbox').attr('checked',true);
+	}
+	if (data.winb === '0'){
+		$('#check_winborder').attr('checked',false);
+		toggle_winborder();
+	}
+	if (data.save_in_projects === 0){
+		$('#check_savelocation').attr('checked',false);
+	}
+	if (data.save_session === 0){
+		$('#check_remember').attr('checked',false);
+	}
+	let f = data.fonts.split(',');
+	for (let i = 0; i < f.length-1; i++){
+		add_font(f[i]);
+	}
+	let c = data.colors.split(';');
+	for (let i = 0; i < c.length; i++){
+		add_color(c[i]);
+	}
+	$('#font_size_input').val(data.size);
+	$('#tab_size_input').val(data.mtabs);
 });
 
-$('#check_markdown').change( () => {
-	ipc.send('app','toggle-markdown');
-});
-
-$('#check_winborder').change( () => {
-	toggle_winborder();
-	ipc.send('app','toggle-winborder');
+$(':input').change( (e) => {
+	switch (e.target.id){
+		case 'check_toolbox':
+			ipc.send('app','toggle-toolbox');
+			break;
+		case 'check_markdown':
+			ipc.send('app','toggle-markdown');
+			break;
+		case 'check_remember':
+			ipc.send('app','toggle-session-save');
+			break;
+		case 'check_savelocation':
+			ipc.send('app','toggle-save-location');
+			break;
+		case 'check_winborder':
+			toggle_winborder();
+			ipc.send('app','toggle-winborder');
+			break;
+	}
 });
 
 $('#font_size_input').keyup( () => {
@@ -153,5 +169,12 @@ $('#tab_size_input').keyup( () => {
 	ipc.send('app','max-tabs=' + $('#tab_size_input').val() );
 });
 
-$('#font_size_input').val(url.searchParams.get('size'));
-$('#tab_size_input').val(url.searchParams.get('mtabs'));
+let dir = path.join(__dirname + dLoop + '/userdata/themes');
+let files = fs.readdirSync(dir).toString().split(',');
+for (let i in files){
+	files[i] = files[i].replace('.pthm','');
+	let n_o = document.createElement('button');
+	$(n_o).attr('class','selector').text(files[i]).attr('onclick','option_switch_theme("' + files[i] + '")').insertBefore($('#theme_help'));
+}
+
+ipc.send('app','get-settings');

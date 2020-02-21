@@ -8,7 +8,7 @@ const path = require('path');
 var mouse_x = 0, mouse_y = 0;
 
 let home_toggled = false;
-let theme_current = 'midnight';
+let theme_current = 'Midnight';
 let default_fonts = ['Segoe UI Light','Roboto Light','Arial'];
 let fonts = '';
 let colors = '';
@@ -22,8 +22,20 @@ let close_force = false;
 let status_fadeout = 3000;
 let recent = { limit: 5, docs: [] };
 let hovered_over = null;
+let use_default_save_location = 1;
+let remember_session = 1;
 
 let url = new URL(window.location.href);
+
+let dLoop = '';
+dTesting: for (let i = 0; i < 5; i++) {
+	try {
+		fs.accessSync(path.join(__dirname + dLoop + '/resources'));
+	} catch (err) {
+		dLoop += '/..';
+		continue dTesting;
+	}
+}
 
 $(document).mousemove( (e) => {
 	mouse_x = e.pageX;

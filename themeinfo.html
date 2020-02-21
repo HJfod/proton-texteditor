@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Custom theme</title>
+<title>Theme info</title>
 <meta charset='UTF-8'/>
 <link rel='stylesheet' href='scripts/main.css'/>
 </head>
@@ -11,7 +11,7 @@
 
 <div id='titlebar' class='panel titlebar'>
 	
-	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Custom theme</text>
+	<text id='title' class='title' style='color: var(--gui-color-title-text); left: var(--gui-title-margin);'>Custom themes</text>
 
 	<button id='button_close' class='button close' onclick='window.close();'>&#10005;</button>
 	<!--
@@ -23,11 +23,7 @@
 
 <div class='option_tab' style='top: var(--gui-size-titlebar); height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-margin) ) )'>
 	
-	<textarea id='custom_theme_textarea' style='width: calc( 100% - var(--gui-size-margin) ); height: calc( 100% - ( var(--gui-size-margin) * 8 ) ); resize: none; color: #0f0; background-color: #111; outline: none; border: none;'></textarea>
-	
-	<button class='selector' onclick='apply_custom_theme();'>Finish</button>
-	
-	<text style='opacity: 0.7; font-size: 12px;'>Note: Due to the <u><b>amazing</b></u> coding of this app, the theme on the Settings page doesn't update immediately.</text>
+	<text>Themes are located in /userdata/themes. To install a custom theme, add a new theme there and then restart the app.</text>
 	
 </div>
 
@@ -38,6 +34,5 @@
 <script src='scripts/init.js'></script>
 <script src='scripts/theme.js'></script>
 <script src='scripts/gui.js'></script>
-<script src='scripts/custom_theme.js'></script>
 </body>
 </html>
