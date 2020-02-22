@@ -63,6 +63,9 @@ function colourText(how = 0) {
 		case 8:
 			document.execCommand('removeFormat');
 			break;
+		case 9:
+			ipc.send('app','new-image');
+			break;
 	}
 }
 

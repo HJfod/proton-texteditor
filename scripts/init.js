@@ -57,7 +57,16 @@ $(document).mousemove( (e) => {
 			}
 			
 			toolbox_timeout = setTimeout(() => {
-				$('#toolbox').css('left',mouse_x + 'px').css('top',(mouse_y + 15) + 'px').text(ta.attr('data-tool')).css('opacity','1');
+				let m = $('#toolbox');
+				m.text(ta.attr('data-tool')).css('opacity','1');
+				let mex = mouse_x, mey = mouse_y + 15;
+				if (mex > window.innerWidth - Number(m.css('width').replace('px',''))){
+					mex = mouse_x - Number(m.css('width').replace('px',''));
+				}
+				if (mey > window.innerHeight - Number(m.css('height').replace('px',''))){
+					mey = mouse_y - 15 - Number(m.css('height').replace('px',''));
+				}
+				m.css('left',mex + 'px').css('top',mey + 'px');
 			},1000);
 		}else{
 			hovered_over = null;

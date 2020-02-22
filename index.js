@@ -93,6 +93,21 @@ app.on('ready', () => {
 			case 'get-settings':
 				setwind.webContents.send('settings',current_settings);
 				break;
+			case 'new-image':
+				let s = dialog.showOpenDialog({});
+				s.then((o) => {
+					if (!o.canceled){
+						if (o.filePaths[0].match(/(.png)|(.jpg)/g) == null){
+							dialog.showMessageBox({ type: 'error', title: 'Illegal format', message: 'Supported image formats: .png, .jpg' });
+						}else{
+							console.log('Opening image ' + o.filePaths[0]);
+							window_main.webContents.send('app','image=' + o.filePaths[0]);
+						}
+					}else{
+						console.log('Image cancelled');
+					}
+				});
+				break;
 			default:
 				window_main.webContents.send('app',arg);
 		}

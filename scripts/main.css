@@ -251,6 +251,7 @@ body {
 	font-family: var(--gui-button-font);
 	color: var(--gui-color-button-text);
 	pointer-events: none;
+	white-space: nowrap;
 }
 
 .menu_window.unicode {
@@ -588,4 +589,9 @@ body {
 
 .recent_file:hover {
 	background-color: var(--gui-color-button-hover);
+}
+
+.pic {
+	width: 50%;
+	box-sizing: border-box;
 }

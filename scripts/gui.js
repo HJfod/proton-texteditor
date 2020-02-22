@@ -123,6 +123,14 @@ ipc.on('app', (event, arg) => {
 			close_force = true;
 			window.close();
 			break;
+		case 'image':
+			try {
+				$('#writing_area').focus();
+				let id = document.getElementsByClassName('pic').length;
+				document.execCommand('insertHTML',0,'<img src="' + a[1] + '" class="pic" onclick=edit_image(event) data-menu=' + String.raw`Remove\\delete_image(` + id + ')></img>');
+			} catch (err) {
+				throw err;
+			}
 	}
 });
 
@@ -132,6 +140,12 @@ function resize_tabs() {
 	}else{
 		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-normal)');
 	}
+}
+
+function edit_image(e) {
+	let i = $(e.target);
+	
+	i.css('border','5px solid #aaf');
 }
 
 $('#tabs').bind('DOMSubtreeModified', () => {
@@ -244,8 +258,11 @@ $('[data-menu]').contextmenu( (e) => {
 	}
 	
 	let mex = mouse_x, mey = mouse_y;
-	if (mouse_y > window.innerHeight - m.css('height')){
-		mey = mouse_y - m.css('height');
+	if (mouse_x > window.innerWidth - Number(m.css('width').replace('px',''))){
+		mex = mouse_x - Number(m.css('width').replace('px',''));
+	}
+	if (mouse_y > window.innerHeight - Number(m.css('height').replace('px',''))){
+		mey = mouse_y - Number(m.css('height').replace('px',''));
 	}
 	m.css('left',mex + 'px').css('top',mey + 'px');
 	
