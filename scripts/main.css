@@ -593,11 +593,10 @@ body {
 
 .pic {
 	width: 50%;
-	box-sizing: border-box;
 	transition-duration: var(--gui-transition-time);
-	border: 0px;
+	opacity: 1;
 }
 
 .pic:hover {
-	border: 5px solid #afa;
+	opacity: 0.6;
 }

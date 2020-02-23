@@ -1,5 +1,6 @@
 const ipc = require('electron').ipcRenderer;
 const { shell } = require('electron');
+const { dialog } = require('electron').remote;
 const $ = require('jquery');
 const html = document.documentElement;
 const fs = require('fs');

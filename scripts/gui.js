@@ -126,9 +126,15 @@ ipc.on('app', (event, arg) => {
 		case 'image':
 			try {
 				$('#writing_area').focus();
-				let id = 'pic' + document.getElementsByClassName('pic').length;
-				document.execCommand('insertHTML',0,'<img src="' + a[1] + '" class="pic" data-menu=' + String.raw`Remove\\delete_image("` + id + '")></img>');
-				console.log(id);
+				let pics = document.getElementsByClassName('pic');
+				let id = 'pic' + (Math.round(Math.random()*3456));	// random number for id
+				for (let i in pics){
+					if (pics[i].id === id){
+						id = 'pic' + (Math.round(Math.random()*3456));
+						i = 0;
+					}
+				}
+				document.execCommand('insertHTML',0,'<img src="' + a[1] + '" class="pic" id="' + id + `" data-menu='` + String.raw`Remove\\delete_image("` + id + `")'></img>`);
 			} catch (err) {
 				throw err;
 			}
@@ -143,8 +149,7 @@ function resize_tabs() {
 	}
 }
 
-function delete_image(which){
-	console.log(`#${which}`);
+function delete_image(which) {
 	$(`#${which}`).remove();
 }
 
