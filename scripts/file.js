@@ -4,10 +4,11 @@ function new_project() {
 
 function save_project(e = 0) {
 	ipc.send('file','name=' + documents[current].name);
+	let o;
 	switch (e){
 		case 0:
 			let where = '';
-			if (use_default_save_location){
+			if (use_default_save_location && documents[current].path === ''){
 				where = path.join(__dirname + '/userdata/projects/' + documents[current].name);
 				fs.writeFileSync(where,'');
 			}else{
@@ -21,10 +22,12 @@ function save_project(e = 0) {
 			let div = document.createElement('div');
 			let d = $(div).html(doc.replace(/<div>/g,'\n').replace(/<br>/g,'')).text();
 			$(div).remove();
-			ipc.send('file-save-as',d);
+			o = { type: 'export', text: d }
+			ipc.send('file-save-as',o);
 			break;
 		case 2:
-			ipc.send('file-save-as',$('#writing_area').html());
+			o = { type: '', text: $('#writing_area').html() }
+			ipc.send('file-save-as',o);
 			break;
 	}
 }

@@ -107,7 +107,7 @@ ipc.on('app', (event, arg) => {
 			show_status(a[1],0);
 			break;
 		case 'file-save':
-			show_status('File succesfully save at ' + a[1],0);
+			show_status('File succesfully saved at ' + a[1],0);
 			documents[current].name = a[1].split('\\').pop();
 			documents[current].path = a[1];
 			documents[current].changed = false;
@@ -126,8 +126,9 @@ ipc.on('app', (event, arg) => {
 		case 'image':
 			try {
 				$('#writing_area').focus();
-				let id = document.getElementsByClassName('pic').length;
-				document.execCommand('insertHTML',0,'<img src="' + a[1] + '" class="pic" onclick=edit_image(event) data-menu=' + String.raw`Remove\\delete_image(` + id + ')></img>');
+				let id = 'pic' + document.getElementsByClassName('pic').length;
+				document.execCommand('insertHTML',0,'<img src="' + a[1] + '" class="pic" data-menu=' + String.raw`Remove\\delete_image("` + id + '")></img>');
+				console.log(id);
 			} catch (err) {
 				throw err;
 			}
@@ -142,10 +143,9 @@ function resize_tabs() {
 	}
 }
 
-function edit_image(e) {
-	let i = $(e.target);
-	
-	i.css('border','5px solid #aaf');
+function delete_image(which){
+	console.log(`#${which}`);
+	$(`#${which}`).remove();
 }
 
 $('#tabs').bind('DOMSubtreeModified', () => {

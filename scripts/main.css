@@ -594,4 +594,10 @@ body {
 .pic {
 	width: 50%;
 	box-sizing: border-box;
+	transition-duration: var(--gui-transition-time);
+	border: 0px;
+}
+
+.pic:hover {
+	border: 5px solid #afa;
 }

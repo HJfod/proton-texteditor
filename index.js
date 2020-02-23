@@ -133,10 +133,12 @@ app.on('ready', () => {
 									c.then((e) => {
 										if (e.response == 0){
 											openFile(o.filePaths[0],data.toString(),false);
+											window_main.webContents.send('app','file=' + 'Succesfully opened file!');
 										}
 									});
 								}else{
 									openFile(o.filePaths[0],data.toString(),false);
+									window_main.webContents.send('app','file=' + 'Succesfully opened file!');
 								}
 							});
 						}else{
@@ -170,7 +172,7 @@ app.on('ready', () => {
 				fs.writeFile(file_path, arg, (err2) => {
 					if (err2) throw err2;
 					console.log('File succesfully saved at ' + file_path);
-					window_main.webContents.send('app','file-save=' + file_path);
+					window_main.webContents.send('app','file=Succesfully saved at ' + file_path);
 				});
 			}
 		});
@@ -201,13 +203,24 @@ function toggleFullscreen() {
 }
 
 function saveFile(arg) {
+	let tx, ty = '';
+	if (typeof arg == 'object'){
+		tx = arg.text;
+		ty = arg.type;
+	}else{
+		tx = arg;
+	}
 	let s = dialog.showSaveDialog({ defaultPath: file_name });
 	s.then((o) => {
 		if (!o.canceled){
-			fs.writeFile(o.filePath, arg, (err) => {
+			fs.writeFile(o.filePath, tx, (err) => {
 				if (err) throw err;
 				console.log('The file has been saved at ' + o.filePath);
-				window_main.webContents.send('app','file-save=' + o.filePath);
+				if (ty === 'export'){
+					window_main.webContents.send('app','file=Succesfully exported at ' + o.filePath);
+				}else{
+					window_main.webContents.send('app','file-save=' + o.filePath);
+				}
 			});
 		}else{
 			console.log('File save cancelled!');

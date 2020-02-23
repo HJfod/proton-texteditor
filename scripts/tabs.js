@@ -45,6 +45,9 @@ function rename_doc(which,set = false) {
 				});
 				$(obj).focusout(() => {
 					$(obj).attr('contenteditable','false');
+					if (documents[which].name != $(obj).text()){
+						documents[which].path = '';
+					}
 					documents[which].name = $(obj).text();
 					$('#writing_area').focus();
 				});
