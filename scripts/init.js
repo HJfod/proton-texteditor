@@ -16,7 +16,7 @@ let colors = '';
 let font_size = 16;
 let documents = [];
 let current = 0;
-let key = { ctrl: 17, sup: 186, sub: 189, shift: 16, tab: 9, s: 83, e: 63, o: 79, n: 78, f1: 112, w: 87, left: 37, right: 39 };
+let key = { ctrl: 17, sup: 186, sub: 189, shift: 16, tab: 9, s: 83, e: 63, o: 79, n: 78, f1: 112, w: 87, left: 37, right: 39, h: 72, r: 82 };
 let max_tabs = 40;
 let toolbox_timeout;
 let close_force = false;

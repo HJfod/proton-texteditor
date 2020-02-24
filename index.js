@@ -172,7 +172,7 @@ app.on('ready', () => {
 				fs.writeFile(file_path, arg, (err2) => {
 					if (err2) throw err2;
 					console.log('File succesfully saved at ' + file_path);
-					window_main.webContents.send('app','file=Succesfully saved at ' + file_path);
+					window_main.webContents.send('app','file-save= ' + file_path);
 				});
 			}
 		});
@@ -376,6 +376,13 @@ const mainMenuTemplate = [
 				accelerator: process.platform == 'darwin' ? 'Command+Shift+I' : 'Ctrl+Shift+I',
 				click(){
 					window_main.toggleDevTools();
+				}
+			},
+			{
+				label: 'Reload',
+				accelerator: 'F5',
+				click() {
+					window_main.reload();
 				}
 			},
 			{

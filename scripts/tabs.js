@@ -21,7 +21,7 @@ function new_doc(nam = 'Unnamed.txt', txt = '', pth = ''){
 		}
 	}
 	let n_t = document.createElement('button');
-	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).attr('data-menu',String.raw`Rename\\rename_doc(`+t_c+String.raw`)//Close (Ctrl + W)\\close_doc(`+t_c+`)`+String.raw`//Details\\info_doc(`+t_c+`)`+String.raw`//Move left (Ctrl + Arrow left)\\move_doc(${t_c},-1)//Move right (Ctrl + Arrow right)\\move_doc(${t_c},1)`).insertBefore($('#tabnew'));
+	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).mouseenter(hover_doc).attr('data-menu',String.raw`Rename (Ctrl + R)\\rename_doc(`+t_c+String.raw`)//Close (Ctrl + W)\\close_doc(`+t_c+`)`+String.raw`//Details (Ctrl + H)\\info_doc(`+t_c+`)`+String.raw`//Move left (Ctrl + Arrow left)\\move_doc(${t_c},-1)//Move right (Ctrl + Arrow right)\\move_doc(${t_c},1)`).insertBefore($('#tabnew'));
 	documents[t_c] = { name: nam, contents: txt, path: pth, changed: false };
 	if (t_c == 0 && txt != ''){
 		$('#writing_area').html(txt.replace(/(?:\r\n|\r|\n)/g,'<br>'));
@@ -33,6 +33,11 @@ function rename_doc(which,set = false) {
 	$('#tabs').children().each((i,obj) => {
 		if ($(obj).attr('id') === 'tab'+which){
 			if (!set){
+				let star = false;
+				if ($(obj).text().endsWith('*')){
+					$(obj).text($(obj).text().replace(/\*/g,''));
+					star = true;
+				}
 				$(obj).attr('contenteditable','true').focus();
 				document.execCommand('selectAll', false, null);
 				$(obj).keypress((e) => {
@@ -45,6 +50,9 @@ function rename_doc(which,set = false) {
 				});
 				$(obj).focusout(() => {
 					$(obj).attr('contenteditable','false');
+					if (star){
+						alert_doc(Number($(obj).attr('id').replace('tab','')),1)
+					}
 					if (documents[which].name != $(obj).text()){
 						documents[which].path = '';
 					}
@@ -162,4 +170,29 @@ function add_recent_doc(pth) {
 	let n_r = document.createElement('button');
 	$(n_r).text(t).attr('onclick','open_project("' + pth.replace(/\\/g,'bSlashChar') + '")').attr('data-tool',pth).attr('class','recent_file');
 	r.append($(n_r));
+}
+
+function hover_doc(e) {
+	let n_x = document.createElement('button');
+	let wh = Number($(e.target).attr('id').replace('tab',''));
+	let l = $(e.target).position().left + Number(($(e.target).css('width')).replace('px',''));
+	$(n_x).text('\u2715').attr('class','tab_close').css('left',`calc(${l}px - var(--gui-size-tab)`).click(() => { $(n_x).remove(); close_doc( wh ); }).insertBefore($(e.target));
+	$(e.target).mouseleave(() => { if (!($(n_x).is(':hover'))){ $(n_x).remove() } });
+	$(n_x).mouseleave(() => { $(n_x).remove() });
+}
+
+function alert_doc(which,y) {
+	$('#tabs').children().each((i,obj) => {
+		if ($(obj).attr('id') === 'tab'+which){
+			if (y === 1){
+				if (!($(obj).text().endsWith('*'))){
+					$(obj).text($(obj).text()+'*');
+				}
+			}else{
+				if ($(obj).text().endsWith('*')){
+					$(obj).text($(obj).text().replace(/\*/g,''));
+				}
+			}
+		}
+	});
 }

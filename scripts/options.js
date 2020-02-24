@@ -144,6 +144,7 @@ $(':input').change( (e) => {
 	switch (e.target.id){
 		case 'check_toolbox':
 			ipc.send('app','toggle-toolbox');
+			$('#toolbox').is(':hidden') ? $('#toolbox').show() : $('#toolbox').hide();
 			break;
 		case 'check_markdown':
 			ipc.send('app','toggle-markdown');

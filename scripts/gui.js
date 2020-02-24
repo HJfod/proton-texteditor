@@ -111,6 +111,8 @@ ipc.on('app', (event, arg) => {
 			documents[current].name = a[1].split('\\').pop();
 			documents[current].path = a[1];
 			documents[current].changed = false;
+			documents[current].contents = $('#writing_area').html();
+			alert_doc(current,0);
 			rename_doc(current,a[1].split('\\').pop());
 			add_recent_doc(a[1]);
 		case 'toggle-session-save':
@@ -207,6 +209,12 @@ $(document).mouseup( () => {
 			move_doc(current,1);
 			th = false;
 			break;
+		case key.ctrl + ',' + key.h:
+			info_doc(current);
+			break;
+		case key.ctrl + ',' + key.r:
+			rename_doc(current);
+			break;
 		default:
 			th = false;
 	}
@@ -220,6 +228,7 @@ $(document).mouseup( () => {
 $('#writing_area').keyup(() => {
 	if (documents[current].contents != $('#writing_area').html()){
 		documents[current].changed = true;
+		alert_doc(current,1);
 	}
 });
 
