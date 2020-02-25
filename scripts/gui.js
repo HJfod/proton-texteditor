@@ -210,6 +210,9 @@ $(document).mouseup( () => {
 			th = false;
 			break;
 		case key.ctrl + ',' + key.h:
+			toggle_home()
+			break;
+		case key.ctrl + ',' + key.t:
 			info_doc(current);
 			break;
 		case key.ctrl + ',' + key.r:

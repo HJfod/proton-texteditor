@@ -25,9 +25,13 @@ If you need specific help or want to report a bug, contact HJfod on Discord at H
 
 > Ctrl + N: New file
 
-> Ctrl + E: Export fule
+> Ctrl + E: Export file
+
+> Ctrl + H: Toggle home
 
 > Ctrl + Z: Undo
+
+> Ctrl + Shift + Z: Redo
 
 > Ctrl + U: Underline
 
@@ -38,3 +42,19 @@ If you need specific help or want to report a bug, contact HJfod on Discord at H
 > Ctrl + ^: Superscript
 
 > Ctrl + _: Subscript
+
+> Ctrl + T: Show Document Info
+
+> Ctrl + W: Close tab
+
+> Ctrl + R: Rename tab
+
+> Ctrl + Arrow Left: Move tab left
+
+> Ctrl + Arrow right: Move tab right
+
+##### Developer commands
+
+> F5: Reload app
+
+> Ctrl + Shift + I: Open Inspector
