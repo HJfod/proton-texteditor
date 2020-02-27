@@ -172,7 +172,7 @@ app.on('ready', () => {
 				fs.writeFile(file_path, arg, (err2) => {
 					if (err2) throw err2;
 					console.log('File succesfully saved at ' + file_path);
-					window_main.webContents.send('app','file-save= ' + file_path);
+					window_main.webContents.send('app','file-save=1' + file_path);
 				});
 			}
 		});
@@ -219,7 +219,7 @@ function saveFile(arg) {
 				if (ty === 'export'){
 					window_main.webContents.send('app','file=Succesfully exported at ' + o.filePath);
 				}else{
-					window_main.webContents.send('app','file-save=' + o.filePath);
+					window_main.webContents.send('app','file-save=0' + o.filePath);
 				}
 			});
 		}else{

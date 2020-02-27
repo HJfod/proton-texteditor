@@ -603,8 +603,8 @@ body {
 
 .tab_close {
 	position: absolute;
-	width: calc( var(--gui-size-tab) / 1.2 );
-	height: calc( var(--gui-size-tab) / 1.2 );
+	width: calc( var(--gui-size-tab-normal) / 1.2 );
+	height: calc( var(--gui-size-tab-normal) / 1.2 );
 	top: calc( var(--gui-size-tab) / 10 );
 	left: 0px;
 	border: none;

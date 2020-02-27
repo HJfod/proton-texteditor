@@ -21,7 +21,7 @@ function new_doc(nam = 'Unnamed.txt', txt = '', pth = ''){
 		}
 	}
 	let n_t = document.createElement('button');
-	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).mouseenter(hover_doc).attr('data-menu',String.raw`Rename (Ctrl + R)\\rename_doc(`+t_c+String.raw`)//Close (Ctrl + W)\\close_doc(`+t_c+`)`+String.raw`//Details (Ctrl + H)\\info_doc(`+t_c+`)`+String.raw`//Move left (Ctrl + Arrow left)\\move_doc(${t_c},-1)//Move right (Ctrl + Arrow right)\\move_doc(${t_c},1)`).insertBefore($('#tabnew'));
+	$(n_t).attr('class','tab').attr('onclick','switch_doc('+t_c+')').text(nam).attr('id','tab'+t_c).mouseenter(hover_doc).attr('data-menu',String.raw`Rename (Ctrl + R)\\rename_doc(`+t_c+String.raw`)//Close (Ctrl + W)\\close_doc(`+t_c+`)`+String.raw`//Details (Ctrl + T)\\info_doc(`+t_c+`)`+String.raw`//Move left (Ctrl + Arrow left)\\move_doc(${t_c},-1)//Move right (Ctrl + Arrow right)\\move_doc(${t_c},1)`).insertBefore($('#tabnew'));
 	documents[t_c] = { name: nam, contents: txt, path: pth, changed: false };
 	if (t_c == 0 && txt != ''){
 		$('#writing_area').html(txt.replace(/(?:\r\n|\r|\n)/g,'<br>'));
@@ -161,6 +161,7 @@ function add_recent_doc(pth) {
 	let r = $('#recent_files');
 	if (recent.docs.length >= recent.limit){
 		r.children().get(0).remove();
+		recent.docs.splice(0,1);
 	}
 	let t = pth.split('\\').pop();
 	if (t.length > 12){
@@ -176,7 +177,7 @@ function hover_doc(e) {
 	let n_x = document.createElement('button');
 	let wh = Number($(e.target).attr('id').replace('tab',''));
 	let l = $(e.target).position().left + Number(($(e.target).css('width')).replace('px',''));
-	$(n_x).text('\u2715').attr('class','tab_close').css('left',`calc(${l}px - var(--gui-size-tab)`).click(() => { $(n_x).remove(); close_doc( wh ); }).insertBefore($(e.target));
+	$(n_x).text('\u2715').attr('class','tab_close').css('left',`calc(${l}px - var(--gui-size-tab-normal)`).click(() => { $(n_x).remove(); close_doc( wh ); }).insertBefore($(e.target));
 	$(e.target).mouseleave(() => { if (!($(n_x).is(':hover'))){ $(n_x).remove() } });
 	$(n_x).mouseleave(() => { $(n_x).remove() });
 }

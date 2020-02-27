@@ -12,6 +12,7 @@ try {
 		savedata = savedata.split('\n');
 		
 		let sett = savedata[0].split('&');
+		console.log(sett);
 		for (let i in sett){
 			let s = sett[i].split('=');
 			

@@ -107,14 +107,18 @@ ipc.on('app', (event, arg) => {
 			show_status(a[1],0);
 			break;
 		case 'file-save':
-			show_status('File succesfully saved at ' + a[1],0);
-			documents[current].name = a[1].split('\\').pop();
-			documents[current].path = a[1];
+			let f = a[1].substring(1);
+			let t = Number(a[1].substring(0,1));
+			show_status('File succesfully saved at ' + f,0);
+			documents[current].name = f.split('\\').pop();
+			documents[current].path = f;
 			documents[current].changed = false;
 			documents[current].contents = $('#writing_area').html();
 			alert_doc(current,0);
-			rename_doc(current,a[1].split('\\').pop());
-			add_recent_doc(a[1]);
+			rename_doc(current,f.split('\\').pop());
+			if (!t){
+				add_recent_doc(f);
+			}
 		case 'toggle-session-save':
 			remember_session ? remember_session = 0 : remember_session = 1;
 			break;

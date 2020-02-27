@@ -21,7 +21,7 @@ let max_tabs = 40;
 let toolbox_timeout;
 let close_force = false;
 let status_fadeout = 3000;
-let recent = { limit: 5, docs: [] };
+let recent = { limit: 6, docs: [] };
 let hovered_over = null;
 let use_default_save_location = 1;
 let remember_session = 1;
