@@ -176,7 +176,7 @@ function add_recent_doc(pth) {
 function hover_doc(e) {
 	let n_x = document.createElement('button');
 	let wh = Number($(e.target).attr('id').replace('tab',''));
-	let l = $(e.target).position().left + Number(($(e.target).css('width')).replace('px',''));
+	let l = $(e.target).position().left + Number(($(e.target).css('width')).replace('px','')) + $('#tabs')[0].scrollLeft;
 	$(n_x).text('\u2715').attr('class','tab_close').css('left',`calc(${l}px - var(--gui-size-tab-normal)`).click(() => { $(n_x).remove(); close_doc( wh ); }).insertBefore($(e.target));
 	$(e.target).mouseleave(() => { if (!($(n_x).is(':hover'))){ $(n_x).remove() } });
 	$(n_x).mouseleave(() => { $(n_x).remove() });
@@ -196,4 +196,17 @@ function alert_doc(which,y) {
 			}
 		}
 	});
+}
+
+function bookmark_doc(which) {
+	let dir = path.join(__dirname + dLoop + '/userdata');
+	try {
+		fs.accessSync(dir);
+		
+		let f = fs.readFileSync(dir).toString();
+		
+		
+	} catch {
+		
+	}
 }

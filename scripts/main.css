@@ -608,7 +608,7 @@ body {
 	top: calc( var(--gui-size-tab) / 10 );
 	left: 0px;
 	border: none;
-	background-color: var(--gui-color-menu-background);
+	background-color: var(--gui-color-background);
 	font-family: var(--gui-button-home-font);
 	font-size: calc( var(--gui-size-tab-text) / 1.2 );
 	color: var(--gui-color-button-text);
