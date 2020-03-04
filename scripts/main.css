@@ -350,6 +350,7 @@ body {
 	display: inline;
 	height: calc( var(--gui-size-tab) - 1px );
 	width: 100%;
+	left: 0px;
 	border-bottom: 1px solid var(--gui-color-tab-border);
 	z-index: -1;
 	float: left;

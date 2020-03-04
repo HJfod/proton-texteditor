@@ -150,6 +150,7 @@ ipc.on('app', (event, arg) => {
 function resize_tabs() {
 	if ($('#tabs')[0].scrollWidth > $('#tabs').innerWidth()) {
 		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-big)');
+		$($('.tabs_border').get(0)).css('width',$('#tabs')[0].scrollWidth + 'px');
 	}else{
 		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-normal)');
 	}
