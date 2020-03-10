@@ -37,6 +37,13 @@ for (let i in required_dir){
 let verdir = path.join(__dirname + dLoop + '/userdata/version.json');
 try {
 	fs.accessSync(verdir);
+	
+	let v_p = require(__dirname + '/package.json').version;
+	let v_l = require(verdir).version;
+	
+	if (v_p !== v_l){
+		fs.writeFileSync(verdir, '{ "version": "' + v_p + '" }');
+	}
 } catch {
 	let v = require(__dirname + '/package.json').version;
 	fs.writeFileSync(verdir, '{ "version": "' + v + '" }');

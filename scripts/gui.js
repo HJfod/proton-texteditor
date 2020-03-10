@@ -164,6 +164,7 @@ ipc.on('app', (event, arg) => {
 			if (!t){
 				add_recent_doc(f);
 			}
+			break;
 		case 'toggle-session-save':
 			remember_session ? remember_session = 0 : remember_session = 1;
 			break;
@@ -192,6 +193,7 @@ ipc.on('app', (event, arg) => {
 			} catch (err) {
 				throw err;
 			}
+			break;
 	}
 });
 
@@ -236,8 +238,9 @@ $(document).mouseup( () => {
 			break;
 		case key.ctrl + ',' + key.s:
 			save_project(0);
+			console.log(remember_session);
 			break;
-		case key.ctrl + key.shift + ',' + key.s:
+		case key.ctrl + ',' + key.shift + ',' + key.s:
 			save_project(2);
 			break;
 		case key.ctrl + ',' + key.e:
