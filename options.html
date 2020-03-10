@@ -57,6 +57,11 @@
 		<span class='checkbox_checkmark'></span>
 	</label>
 	
+	<label class='checkbox_container' data-tool='Check for updates on startup'>
+		<input type='checkbox' id='check_update' checked>Check for updates on startup</input>
+		<span class='checkbox_checkmark'></span>
+	</label>
+	
 	<br><text>Tab limit</text><br>
 	
 	<input class='selector' id='tab_size_input' maxlength=2 size=1 value=5 data-tool='Maximum tab amount'></input>
@@ -74,6 +79,7 @@
 	<div class='select' id='font_select_c'>
 		<input class='selector' id='custom_font_input'></input>
 		<button class='selector' onclick='add_font($("#custom_font_input").val());'>Add</button>
+		<button class='selector' onclick='switch_font("Custom");'>Cancel</button>
 	</div>
 	
 	<br><br>
@@ -91,6 +97,7 @@
 	<div class='select' id='color_select_c'>
 		<input class='selector' id='custom_color_input'></input>
 		<button class='selector' onclick='add_color($("#custom_color_input").val());'>Add</button>
+		<button class='selector' onclick='add_color("Custom");'>Cancel</button>
 	</div>
 	
 </div>
@@ -113,7 +120,7 @@
 
 <div id='o_tab3' class='option_tab'>
 	
-	<img width=20 src='resources/icon.png'></img>&nbsp;&nbsp;<text style='font-size: calc(var(--gui-size-button-text) * 1.5)'>Proton v1.3.5</text>
+	<img width=20 src='resources/icon.png'></img>&nbsp;&nbsp;<text style='font-size: calc(var(--gui-size-button-text) * 1.5)'>Proton v1.3.7</text>
 	
 	<br><br>
 	
@@ -138,6 +145,8 @@
 	
 	<button class='selector' onclick='shell.openExternal("https://github.com/HJfod/proton-texteditor#help")'>Help</button>
 	<button class='selector' onclick='open_logs();'>View logs</button>
+	<button class='selector' onclick='check_update();'>Check for updates</button><br>
+	<text id='option_status' class='title status update'></text>
 	
 </div>
 

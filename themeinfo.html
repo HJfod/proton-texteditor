@@ -24,6 +24,8 @@
 <div class='option_tab' style='top: var(--gui-size-titlebar); height: calc( 100% - ( var(--gui-size-titlebar) + var(--gui-size-margin) ) )'>
 	
 	<text>Themes are located in /userdata/themes. To install a custom theme, add a new theme there and then restart the app.</text>
+	<br><br>
+	<button class='selector' onclick="require('child_process').exec('start ' + path.join(__dirname + '/userdata/themes'));">Open folder</button>
 	
 </div>
 
@@ -31,8 +33,8 @@
 
 <div id='menu_select' class='menu_window'></div>
 
-<script src='scripts/init.js'></script>
-<script src='scripts/theme.js'></script>
-<script src='scripts/gui.js'></script>
+<script defer src='scripts/init.js'></script>
+<script defer src='scripts/theme.js'></script>
+<script defer src='scripts/gui.js'></script>
 </body>
 </html>

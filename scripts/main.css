@@ -195,6 +195,10 @@ body {
 	white-space: nowrap;
 }
 
+.title.status.update {
+	position: initial;
+}	
+
 .button {
 	background-color: rgba(0,0,0,0);
 	position: absolute;

@@ -11,7 +11,7 @@ function options_close() {
 	let t = '';
 	let c = '';
 	$('.selector.font').each((i,obj) => {
-		if (i < default_fonts.length || i > $('.selector.font').length - 2){
+		if (i > $('.selector.font').length - 2){
 			return true;
 		}
 		t += $(obj).text() + ',';
@@ -39,7 +39,7 @@ function switch_tab(to){
 
 function option_switch_theme(to) {
 	if (to === true){
-		window.open('themeinfo.html','','width=350,height=120');
+		window.open('themeinfo.html','','width=350,height=155');
 	}else{
 		ipc.send('app','change-theme=' + to);
 		switch_theme(to);
@@ -48,8 +48,13 @@ function option_switch_theme(to) {
 
 function switch_font(to) {
 	if (to === 'Custom'){
-		$('#font_select').hide();
-		$('#font_select_c').show();
+		if ($('#font_select_c').is(':hidden')){
+			$('#font_select').hide();
+			$('#font_select_c').show();
+		}else{
+			$('#font_select').show();
+			$('#font_select_c').hide();
+		}
 	}else{
 		ipc.send('app','change-font=' + to);
 	}
@@ -57,13 +62,23 @@ function switch_font(to) {
 
 function add_color(t) {
 	if (t === 'Custom'){
-		$('#color_select').hide();
-		$('#color_select_c').show();
+		if ($('#color_select_c').is(':hidden')){
+			$('#color_select').hide();
+			$('#color_select_c').show();
+		}else{
+			$('#color_select').show();
+			$('#color_select_c').hide();
+		}
 		return true;
 	}
-	t = t.replace(/%23/g,'#');
 	$('#color_select').show();
 	$('#color_select_c').hide();
+	
+	if (t === '' || t == undefined){
+		return true;
+	}
+	
+	t = t.replace(/%23/g,'#');
 	let n_o = document.createElement('button');
 	$(n_o).attr('class','selector color');
 	$(n_o).attr('id','clr'+t.replace(/#/g,''));
@@ -76,6 +91,11 @@ function add_color(t) {
 function add_font(t) {
 	$('#font_select').show();
 	$('#font_select_c').hide();
+	
+	if (t === '' || t == undefined){
+		return true;
+	}
+	
 	let n_o = document.createElement('button');
 	$(n_o).attr('class','selector font');
 	$(n_o).text(t);
@@ -101,10 +121,6 @@ function delete_color(t) {
 	});
 }
 
-for (let i = 0; i < default_fonts.length; i++){
-	add_font(default_fonts[i]);
-}
-
 $('.selector.font').each((i, obj) => { $(obj).css('font-family',$(obj).text()) });
 
 ipc.on('settings', (event, data) => {
@@ -127,6 +143,9 @@ ipc.on('settings', (event, data) => {
 	}
 	if (data.save_session === 0){
 		$('#check_remember').attr('checked',false);
+	}
+	if (data.update_startup === 0){
+		$('#check_update').attr('checked',false);
 	}
 	let f = data.fonts.split(',');
 	for (let i = 0; i < f.length-1; i++){
@@ -154,6 +173,9 @@ $(':input').change( (e) => {
 			break;
 		case 'check_savelocation':
 			ipc.send('app','toggle-save-location');
+			break;
+		case 'check_update':
+			ipc.send('app','toggle-update-checks');
 			break;
 		case 'check_winborder':
 			toggle_winborder();

@@ -1,5 +1,5 @@
 window.onbeforeunload = (e) => {
-	let data = 'theme_current=' + theme_current + '&markdown=' + $('#markdown').css('opacity') + '&toolbox=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size + '&save_session=' + remember_session + '&saveloc=' + use_default_save_location;
+	let data = 'theme_current=' + theme_current + '&markdown=' + $('#markdown').css('opacity') + '&toolbox=' + $('#toolbox').is(':visible') + '&fonts=' + fonts + '&colors=' + colors + '&winb=' + $('#option_border').css('opacity') + '&mtabs=' + max_tabs + '&size=' + font_size + '&save_session=' + remember_session + '&saveloc=' + use_default_save_location + '&check_updates=' + check_updates_on_startup;
 	
 	let recentdata = '\n' + recent.docs.length.toString();
 	

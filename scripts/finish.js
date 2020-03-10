@@ -1,4 +1,5 @@
 colors = '%23f00;%230f0;%2300f;%230ff';
+fonts = 'Segoe UI Light,Roboto Light,Arial';
 
 let dir = path.join(__dirname + dLoop + '/userdata/savedata.txt');
 console.log(dir);
@@ -53,6 +54,9 @@ try {
 				case 'save_session':
 					remember_session = Number(s[1]);
 					break;
+				case 'check_updates':
+					check_updates_on_startup = Number(s[1]);
+					break;
 			}
 		}
 		
@@ -88,4 +92,8 @@ html.style.setProperty('--gui-size-text',font_size + 'px');
 
 if (documents.length == 0){
 	new_doc();
+}
+
+if (check_updates_on_startup && ($('display-status').length)){
+	check_update();
 }

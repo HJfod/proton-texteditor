@@ -34,6 +34,14 @@ for (let i in required_dir){
 	console.log(dir);
 }
 
+let verdir = path.join(__dirname + dLoop + '/userdata/version.json');
+try {
+	fs.accessSync(verdir);
+} catch {
+	let v = require(__dirname + '/package.json').version;
+	fs.writeFileSync(verdir, '{ "version": "' + v + '" }');
+}
+
 app.on('ready', () => {
 	const ipc = require('electron').ipcMain;
 	

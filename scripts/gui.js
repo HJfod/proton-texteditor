@@ -21,10 +21,54 @@ function toggle_home() {
 	}
 }
 
-function show_status(t,type) {
-	type ? type = '#f00' : type = '#0f0';
-	$('#status').text('• ' + t).css('color',type).fadeIn(0).fadeOut(status_fadeout);
-	ipc.send('app','new-log=' + t);
+async function check_update() {
+	require('dns').lookup('google.com', (err) => {
+		if (err && err.code == 'ENOTFOUND') {
+			show_status('Unable to connect to the internet.', 1);
+		} else {
+			latest('HJfod','proton-texteditor').then((res) => {
+				let pjson = require(path.join(__dirname + dLoop + '/userdata/version.json'));
+				let v_g = res.tag_name.replace('v',''), v_l = pjson.version;
+				
+				console.log('Github: ' + v_g);
+				console.log('Local: ' + v_l);
+				if (v_g === v_l) {
+					show_status('You are up to date.', 0);
+				}else{
+					show_status('New version found!', 2);
+					shell.openExternal('https://github.com/HJfod/proton-texteditor/releases');
+				}
+			}).catch((err) => {
+				show_status(err, 1);
+			});
+		}
+	});
+}
+
+function show_status(t,type,f = false) {
+	switch (type) {
+		case 0: type = '#0f0'; break;
+		case 1: type = '#f00'; break;
+		case 2: type = '#ff0'; break;
+	}
+	let target = 'status';
+	if (!($('display-status').length)) {
+		target = 'option_status';
+	}else{
+		if (!f){ ipc.send('app','new-log=' + t); }
+	}
+	
+	if (queued_statuses[0] == undefined || f) {
+		queued_statuses[0] = [t,type];
+		$('#' + target).css('color',type).fadeIn(0).text('• ' + t).fadeOut(status_fadeout, () => {
+			queued_statuses.splice(0,1);
+			if (queued_statuses.length > 0){
+				show_status(queued_statuses[0][0],queued_statuses[0][1],true);
+			}
+		});
+	}else{
+		queued_statuses[queued_statuses.length] = [t,type];
+	}
 }
 
 function toggle_winborder() {
@@ -56,7 +100,8 @@ function open_settings() {
 		mtabs: max_tabs,
 		size: font_size,
 		save_session: remember_session,
-		save_in_projects: use_default_save_location
+		save_in_projects: use_default_save_location,
+		update_startup: check_updates_on_startup
 	}
 	ipc.send('set-settings',data);
 	ipc.send('app','open-settings');
@@ -125,6 +170,9 @@ ipc.on('app', (event, arg) => {
 		case 'toggle-save-location':
 			use_default_save_location ? use_default_save_location = 0 : use_default_save_location = 1;
 			break;
+		case 'toggle-update-checks':
+			check_updates_on_startup ? check_updates_on_startup = 0 : check_updates_on_startup = 1;
+			break;
 		case 'close-force':
 			close_force = true;
 			window.close();
@@ -153,6 +201,7 @@ function resize_tabs() {
 		$($('.tabs_border').get(0)).css('width',$('#tabs')[0].scrollWidth + 'px');
 	}else{
 		html.style.setProperty('--gui-size-tab','var(--gui-size-tab-normal)');
+		$($('.tabs_border').get(0)).css('width','100%');
 	}
 }
 

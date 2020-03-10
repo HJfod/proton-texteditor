@@ -5,12 +5,12 @@ const $ = require('jquery');
 const html = document.documentElement;
 const fs = require('fs');
 const path = require('path');
+const latest = require('github-latest-release');
 
 var mouse_x = 0, mouse_y = 0;
 
 let home_toggled = false;
 let theme_current = 'Midnight';
-let default_fonts = ['Segoe UI Light','Roboto Light','Arial'];
 let fonts = '';
 let colors = '';
 let font_size = 16;
@@ -25,6 +25,8 @@ let recent = { limit: 6, docs: [] };
 let hovered_over = null;
 let use_default_save_location = 1;
 let remember_session = 1;
+let queued_statuses = [];
+let check_updates_on_startup = true;
 
 let url = new URL(window.location.href);
 
