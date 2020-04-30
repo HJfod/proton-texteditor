@@ -22,7 +22,7 @@
     "electron": "^7.1.11",
     "filereader": "^0.10.3",
     "github-latest-release": "^0.1.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "electron-packager": "^14.2.1"
