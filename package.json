@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/HJfod/darkpad#readme",
   "dependencies": {
-    "electron": "^7.1.11",
+    "electron": "^15.5.5",
     "filereader": "^0.10.3",
     "github-latest-release": "^0.1.1",
     "jquery": "^3.4.1"
